@@ -351,5 +351,76 @@
   <footer>
     Благодійний фонд Петра Скрипки © 2026
   </footer>
+  <a href="https://send.monobank.ua/jar/6qpTzTDwDe" target="_blank" class="donate-float" id="donateFloat">
+  <img src="logo.jpg" alt="Зробити донат">
+  <span class="donate-float-text">Зробити донат</span>
+</a>
+
+<script>
+(function () {
+  const btn = document.getElementById('donateFloat');
+  let dragging = false;
+  let moved = false;
+  let startX = 0;
+  let startY = 0;
+  let initialLeft = 0;
+  let initialTop = 0;
+
+  btn.addEventListener('mousedown', function (e) {
+    dragging = true;
+    moved = false;
+
+    const rect = btn.getBoundingClientRect();
+    initialLeft = rect.left;
+    initialTop = rect.top;
+
+    startX = e.clientX;
+    startY = e.clientY;
+
+    btn.style.left = rect.left + 'px';
+    btn.style.top = rect.top + 'px';
+    btn.style.right = 'auto';
+    btn.style.bottom = 'auto';
+
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+      moved = true;
+    }
+
+    let newLeft = initialLeft + dx;
+    let newTop = initialTop + dy;
+
+    const maxLeft = window.innerWidth - btn.offsetWidth;
+    const maxTop = window.innerHeight - btn.offsetHeight;
+
+    if (newLeft < 0) newLeft = 0;
+    if (newTop < 0) newTop = 0;
+    if (newLeft > maxLeft) newLeft = maxLeft;
+    if (newTop > maxTop) newTop = maxTop;
+
+    btn.style.left = newLeft + 'px';
+    btn.style.top = newTop + 'px';
+  });
+
+  document.addEventListener('mouseup', function () {
+    dragging = false;
+  });
+
+  btn.addEventListener('click', function (e) {
+    if (moved) {
+      e.preventDefault();
+      moved = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
