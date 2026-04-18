@@ -121,7 +121,7 @@
       color: white;
       margin-top: 30px;
     }
-    /* ПЛАВАЮЧА КНОПКА ДОНАТУ — КРУЖОК З ПРАПОРОМ І ТРИЗУБОМ + ДОВГА КНОПКА */
+   /* ТОПОВА ПЛАВАЮЧА КНОПКА ДОНАТУ */
 .floating-donate-btn {
   position: fixed;
   right: 20px;
@@ -130,71 +130,143 @@
   align-items: center;
   text-decoration: none;
   z-index: 99999;
+  animation: donatePulse 2.2s infinite;
 }
 
 .floating-donate-icon {
-  width: 68px;
-  height: 68px;
-  min-width: 68px;
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
   border-radius: 50%;
   background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.28);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
   border: 3px solid #ffffff;
   position: relative;
   z-index: 2;
-  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.floating-donate-icon svg {
-  width: 34px;
-  height: 34px;
+.floating-donate-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
+  pointer-events: none;
+}
+
+.floating-donate-icon img {
+  width: 38px;
+  height: 38px;
   display: block;
+  position: relative;
+  z-index: 2;
+  animation: tridentFloat 2.4s ease-in-out infinite;
 }
 
 .floating-donate-text {
-  background: #d62828;
-  color: #ffffff;
-  padding: 16px 24px 16px 40px;
+  background: linear-gradient(180deg, #e53935 0%, #c81d25 100%);
+  color: #fff;
+  padding: 18px 26px 18px 42px;
   margin-left: -18px;
   border-radius: 999px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1;
   white-space: nowrap;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+  letter-spacing: 0.2px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .floating-donate-btn:hover .floating-donate-text {
   transform: translateX(-4px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
 }
 
-@media (max-width: 600px) {
+.floating-donate-btn:hover .floating-donate-icon img {
+  animation: tridentSpin 0.9s ease-in-out 1;
+}
+
+@keyframes donatePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes tridentFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes tridentSpin {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.12);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
   .floating-donate-btn {
-    right: 12px;
-    bottom: 12px;
+    right: 14px;
+    bottom: 14px;
   }
 
+  .floating-donate-icon {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+  }
+
+  .floating-donate-icon img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .floating-donate-text {
+    font-size: 16px;
+    padding: 16px 22px 16px 36px;
+  }
+
+
+@media (max-width: 520px) {
   .floating-donate-icon {
     width: 58px;
     height: 58px;
     min-width: 58px;
   }
 
-  .floating-donate-icon svg {
+  .floating-donate-icon img {
     width: 30px;
     height: 30px;
   }
 
   .floating-donate-text {
-    font-size: 15px;
-    padding: 14px 18px 14px 34px;
+    font-size: 14px;
+    padding: 14px 18px 14px 32px;
   }
-}
+
   </style>
 </head>
 <body>
@@ -396,23 +468,15 @@
   <footer>
     Благодійний фонд Петра Скрипки © 2026
   </footer>
- <a href="https://send.monobank.ua/jar/6qpTzTDwDe"
+<a href="https://send.monobank.ua/jar/6qpTzTDwDe"
    class="floating-donate-btn"
    target="_blank"
+   rel="noopener noreferrer"
    aria-label="Зробити донат">
 
   <div class="floating-donate-icon">
-    <svg viewBox="0 0 64 64">
-      <path fill="#ffd700" stroke="#003b8e" stroke-width="1.6"
-        d="M32 6 C35 10,39 13,44 15 L44 21
-        C42 22,40 24,39 26 L39 35
-        C39 40,41 44,45 47 L45 52
-        C40 51,35 48,32 45
-        C29 48,24 51,19 52 L19 47
-        C23 44,25 40,25 35 L25 26
-        C24 24,22 22,20 21 L20 15
-        C25 13,29 10,32 6 Z"/>
-    </svg>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Coat_of_Arms_of_Ukraine.svg"
+         alt="Герб України">
   </div>
 
   <div class="floating-donate-text">Зробити донат</div>
