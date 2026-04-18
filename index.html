@@ -1,41 +1,172 @@
-<a href="https://send.monobank.ua/jar/6qpTzTDwDe" target="_blank"
-id="donateBtn"
-style="
-position: fixed;
-bottom: 20px;
-right: 20px;
-width: 110px;
-height: 110px;
-border-radius: 50%;
-overflow: hidden;
-z-index: 9999;
-display: block;
-box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-cursor: grab;
-">
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Благодійний фонд Петра Скрипки</title>
 
-<img src="logo.jpg" style="
-width:100%;
-height:100%;
-object-fit: contain;
-background:#fff;
-">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  color: #222;
+}
 
-<span style="
-position:absolute;
-bottom:5px;
-left:50%;
-transform:translateX(-50%);
-background: rgba(0,0,0,0.7);
-color:white;
-padding:4px 8px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
-">
-Зробити донат
-</span>
+.top-banner {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
 
+.intro, section {
+  margin: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.gallery {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 45%;
+  border-radius: 10px;
+}
+
+.report-item {
+  background: #f0f4f8;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+footer {
+  text-align:center;
+  padding:20px;
+  background:#1d3557;
+  color:white;
+}
+
+/* КНОПКА */
+.donate-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 9999;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  cursor: grab;
+}
+
+.donate-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background:#fff;
+}
+
+.donate-text {
+  position:absolute;
+  bottom:5px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<img src="logo.jpg" class="top-banner">
+
+<div class="intro">
+
+<p>
+Я — Петро Скрипка, ветеран, колишній військовий та засновник благодійного фонду Петра Скрипки.
+</p>
+
+<img src="images/photo1.jpg">
+
+<p>
+Після того як я був комісований зі служби за станом здоров’я, я не зупинився.
+Я організував піший благодійний марафон і пройшов від Києва до Нюрнберга,
+подолавши понад 2000 кілометрів.
+</p>
+
+<div class="gallery">
+<img src="images/foto6.jpg">
+<img src="images/foto3.jpg">
+</div>
+
+<p>
+Метою цього марафону був збір коштів на протезування поранених військових.
+Нам вдалося зібрати 1,6 мільйона гривень.
+</p>
+
+<img src="images/foto4.jpg">
+
+<p>
+<a href="https://youtu.be/cwlptGNJJxc" target="_blank">
+Дивитися сюжет про марафон
+</a>
+</p>
+
+<p>
+Повернувшись додому, я організував другий марафон,
+де було зібрано кошти на автомобіль для побратимів.
+</p>
+
+<p>
+Після цього почалися регулярні збори на дрони, авто та допомогу.
+</p>
+
+<p>
+Разом із командою ми заснували благодійний фонд.
+</p>
+
+<h2>Сюжети та новини</h2>
+
+<div class="report-item">
+<a href="https://suspilne.media/rivne/536283" target="_blank">Суспільне Рівне</a>
+</div>
+
+<div class="report-item">
+<a href="https://suspilne.media/lviv/541497" target="_blank">Суспільне Львів</a>
+</div>
+
+<div class="report-item">
+<a href="https://www.ukrinform.ua/rubric-society/3744091" target="_blank">Укрінформ</a>
+</div>
+
+</div>
+
+<section>
+<h2>Про фонд</h2>
+<p>
+З перших днів війни я став на захист України.
+Сьогодні ми допомагаємо військовим та цивільним.
+</p>
+</section>
+
+<footer>
+Благодійний фонд Петра Скрипки © 2026
+</footer>
+
+<a href="https://send.monobank.ua/jar/6qpTzTDwDe" target="_blank" class="donate-btn" id="donateBtn">
+<img src="logo.jpg">
+<div class="donate-text">Зробити донат</div>
 </a>
 
 <script>
@@ -48,7 +179,6 @@ btn.onmousedown = function(e){
   isDown = true;
   offsetX = e.clientX - btn.offsetLeft;
   offsetY = e.clientY - btn.offsetTop;
-  btn.style.cursor = "grabbing";
 };
 
 document.onmousemove = function(e){
@@ -61,6 +191,8 @@ document.onmousemove = function(e){
 
 document.onmouseup = function(){
   isDown = false;
-  btn.style.cursor = "grab";
 };
 </script>
+
+</body>
+</html>
