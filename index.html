@@ -8,9 +8,9 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f7fa;
+      background: #ffffff;
       color: #222;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .top-banner {
@@ -73,16 +73,21 @@
       background: #f3f6fa;
     }
 
+    /* ГОЛОВНІ СЕКЦІЇ БЕЗ БЛОКІВ */
     .intro,
     section,
     .socials {
-      max-width: 1000px;
-      margin: 30px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      width: 100%;
+      margin: 0;
+      padding: 32px 60px;
       box-sizing: border-box;
+      background: #ffffff;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .intro {
+      padding-top: 40px;
     }
 
     .intro img {
@@ -96,6 +101,16 @@
     h2 {
       color: #1d3557;
       margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    p {
+      margin: 0 0 18px 0;
+    }
+
+    ul {
+      padding-left: 22px;
+      margin-bottom: 20px;
     }
 
     .button {
@@ -132,39 +147,21 @@
     }
 
     .report-item {
-      background: #f0f4f8;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 12px;
+      padding: 10px 0;
+      margin-bottom: 8px;
+      background: transparent;
+      border-radius: 0;
     }
 
     footer {
       text-align: center;
-      padding: 25px;
+      padding: 25px 20px;
       background: #1d3557;
       color: white;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
-    /* ЩОБ ТЕКСТ НЕ ЛІЗ У КРАЇ НА ТЕЛЕФОНІ */
-    @media (max-width: 768px) {
-      .intro,
-      section,
-      .socials {
-        margin: 20px 12px;
-        padding: 22px 18px;
-      }
-
-      .top-banner {
-        height: 220px;
-      }
-
-      .side-menu {
-        width: calc(100% - 30px);
-      }
-    }
-
-    /* ТОПОВА ПЛАВАЮЧА КНОПКА ДОНАТУ */
+    /* ПЛАВАЮЧА КНОПКА ДОНАТУ */
     .floating-donate-btn {
       position: fixed;
       right: 20px;
@@ -221,12 +218,6 @@
       box-shadow: 0 12px 28px rgba(0,0,0,0.28);
     }
 
-    @keyframes donatePulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.035); }
-      100% { transform: scale(1); }
-    }
-
     .circle-text {
       position: absolute;
       width: 100%;
@@ -245,10 +236,32 @@
       animation: spinText 6s linear infinite;
     }
 
+    @keyframes donatePulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+      100% { transform: scale(1); }
+    }
+
     @keyframes spinText {
       0%   { transform: rotateY(0deg); }
       40%  { transform: rotateY(360deg); }
       100% { transform: rotateY(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .intro,
+      section,
+      .socials {
+        padding: 24px 20px;
+      }
+
+      .top-banner {
+        height: 220px;
+      }
+
+      .side-menu {
+        width: calc(100% - 30px);
+      }
     }
 
     @media (max-width: 520px) {
@@ -267,15 +280,19 @@
         font-size: 14px;
         padding: 14px 18px 14px 32px;
       }
+
+      .intro,
+      section,
+      .socials {
+        padding: 22px 16px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- КНОПКА МЕНЮ -->
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-  <!-- ВИПАДАЮЧЕ МЕНЮ -->
   <div class="side-menu" id="sideMenu">
     <a href="#about" onclick="closeMenu()">Про фонд</a>
     <a href="#help" onclick="closeMenu()">Як допомогти</a>
