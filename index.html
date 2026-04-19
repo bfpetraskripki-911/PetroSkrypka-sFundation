@@ -862,5 +862,35 @@
     const savedLang = localStorage.getItem("siteLang") || "uk";
     setLanguage(savedLang);
   </script>
+  <style>
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.video-grid video {
+  width: 100%;
+  border-radius: 12px;
+}
+</style>
+
+<section id="videos">
+  <h2>Відеозвіти</h2>
+
+  <div class="video-grid">
+    <video controls>
+      <source src="videos/video1.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+      <source src="videos/video2.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+      <source src="videos/video3.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
 </body>
 </html>
