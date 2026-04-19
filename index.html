@@ -12,21 +12,77 @@
       color: #222;
       line-height: 1.6;
     }
-    .top-banner {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  object-position: bottom;
-  display: block;
-}
 
-    .intro {
-      max-width: 100%;
+    .top-banner {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: bottom;
+      display: block;
+    }
+
+    /* КНОПКА МЕНЮ */
+    .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 12px;
+      background: #16324a;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 100001;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ВИПАДАЮЧЕ МЕНЮ */
+    .side-menu {
+      position: fixed;
+      top: 75px;
+      left: 15px;
+      width: 240px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      padding: 12px 0;
+      display: none;
+      z-index: 100000;
+    }
+
+    .side-menu.show {
+      display: block;
+    }
+
+    .side-menu a {
+      display: block;
+      padding: 14px 18px;
+      text-decoration: none;
+      color: #16324a;
+      font-weight: bold;
+      border-bottom: 1px solid #edf1f5;
+    }
+
+    .side-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .side-menu a:hover {
+      background: #f3f6fa;
+    }
+
+    .intro,
+    section,
+    .socials {
+      max-width: 1000px;
       margin: 30px auto;
       background: white;
-      padding: 30px 0;
+      padding: 30px;
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-sizing: border-box;
     }
 
     .intro img {
@@ -35,29 +91,6 @@
       width: 100%;
       max-width: 500px;
       border-radius: 10px;
-    }
-
-    nav {
-      background: #16324a;
-      text-align: center;
-      padding: 12px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 12px;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    section {
-      max-width: 100%;
-      margin: 30px auto;
-      background: white;
-      padding: 30px 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
     h2 {
@@ -90,15 +123,6 @@
       object-fit: cover;
     }
 
-    .socials {
-      max-width: 100%;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }
-
     .socials a {
       display: inline-block;
       margin: 8px 12px 8px 0;
@@ -121,206 +145,146 @@
       color: white;
       margin-top: 30px;
     }
-   /* ТОПОВА ПЛАВАЮЧА КНОПКА ДОНАТУ */
-.floating-donate-btn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  z-index: 99999;
-  animation: donatePulse 2.2s infinite;
-}
 
-.floating-donate-icon {
-  width: 72px;
-  height: 72px;
-  min-width: 72px;
-  border-radius: 50%;
-  background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
-  border: 3px solid #ffffff;
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-}
+    /* ЩОБ ТЕКСТ НЕ ЛІЗ У КРАЇ НА ТЕЛЕФОНІ */
+    @media (max-width: 768px) {
+      .intro,
+      section,
+      .socials {
+        margin: 20px 12px;
+        padding: 22px 18px;
+      }
 
-.floating-donate-icon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
-  pointer-events: none;
-}
+      .top-banner {
+        height: 220px;
+      }
 
-.floating-donate-icon img {
-  width: 38px;
-  height: 38px;
-  display: block;
-  position: relative;
-  z-index: 2;
-  animation: tridentFloat 2.4s ease-in-out infinite;
-}
+      .side-menu {
+        width: calc(100% - 30px);
+      }
+    }
 
-.floating-donate-text {
-  background: linear-gradient(180deg, #e53935 0%, #c81d25 100%);
-  color: #fff;
-  padding: 18px 26px 18px 42px;
-  margin-left: -18px;
-  border-radius: 999px;
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 1;
-  white-space: nowrap;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.24);
-  letter-spacing: 0.2px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
+    /* ТОПОВА ПЛАВАЮЧА КНОПКА ДОНАТУ */
+    .floating-donate-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      z-index: 99999;
+      animation: donatePulse 2.2s infinite;
+    }
 
-.floating-donate-btn:hover .floating-donate-text {
-  transform: translateX(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
-}
+    .floating-donate-icon {
+      width: 72px;
+      height: 72px;
+      min-width: 72px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+      border: 3px solid #ffffff;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
 
-.floating-donate-btn:hover .floating-donate-icon img {
-  animation: tridentSpin 0.9s ease-in-out 1;
-}
+    .floating-donate-icon::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
+      pointer-events: none;
+    }
 
-@keyframes donatePulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.035);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+    .floating-donate-text {
+      background: linear-gradient(180deg, #e53935 0%, #c81d25 100%);
+      color: #fff;
+      padding: 18px 26px 18px 42px;
+      margin-left: -18px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+      letter-spacing: 0.2px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
 
-@keyframes tridentFloat {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
+    .floating-donate-btn:hover .floating-donate-text {
+      transform: translateX(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+    }
 
-@keyframes tridentSpin {
-  0% {
-    transform: rotateY(0deg) scale(1);
-  }
-  50% {
-    transform: rotateY(180deg) scale(1.12);
-  }
-  100% {
-    transform: rotateY(360deg) scale(1);
-  }
-}
+    @keyframes donatePulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+      100% { transform: scale(1); }
+    }
 
-@media (max-width: 768px) {
-  .floating-donate-btn {
-    right: 14px;
-    bottom: 14px;
-  }
-
-  .floating-donate-icon {
-    width: 64px;
-    height: 64px;
-    min-width: 64px;
-  }
-
-  .floating-donate-icon img {
-    width: 34px;
-    height: 34px;
-  }
-
-  .floating-donate-text {
-    font-size: 16px;
-    padding: 16px 22px 16px 36px;
-  }
-}
-
-@media (max-width: 520px) {
-  .floating-donate-btn {
-    right: 10px;
-    bottom: 10px;
-  }
-
-  .floating-donate-icon {
-    width: 58px;
-    height: 58px;
-    min-width: 58px;
-  }
-
-  .floating-donate-icon img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .floating-donate-text {
-    font-size: 14px;
-    padding: 14px 18px 14px 32px;
-  }
-}
     .circle-text {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  font-size: 11px;
-  font-weight: 900;
-  color: #ffffff;
-text-shadow:
-  0 0 6px rgba(255,255,255,0.8),
-  0 0 12px rgba(255,255,255,0.6),
-  0 0 18px rgba(255,215,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
- animation: spinText 6s linear infinite;
-}
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-size: 11px;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow:
+        0 0 6px rgba(255,255,255,0.8),
+        0 0 12px rgba(255,255,255,0.6),
+        0 0 18px rgba(255,215,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: spinText 6s linear infinite;
+    }
 
-@keyframes spinText {
-  0%   { transform: rotateY(0deg); }
-  40%  { transform: rotateY(360deg); }
-  100% { transform: rotateY(360deg); }
-}
-    @keyframes glowText {
-  0% {
-    text-shadow:
-      0 0 6px rgba(255,255,255,0.6),
-      0 0 10px rgba(255,255,255,0.4);
-  }
-  50% {
-    text-shadow:
-      0 0 14px rgba(255,255,255,1),
-      0 0 22px rgba(255,215,0,0.9);
-  }
-  100% {
-    text-shadow:
-      0 0 6px rgba(255,255,255,0.6),
-      0 0 10px rgba(255,255,255,0.4);
-  }
-}
+    @keyframes spinText {
+      0%   { transform: rotateY(0deg); }
+      40%  { transform: rotateY(360deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    @media (max-width: 520px) {
+      .floating-donate-btn {
+        right: 10px;
+        bottom: 10px;
+      }
+
+      .floating-donate-icon {
+        width: 58px;
+        height: 58px;
+        min-width: 58px;
+      }
+
+      .floating-donate-text {
+        font-size: 14px;
+        padding: 14px 18px 14px 32px;
+      }
+    }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="#about">Про фонд</a>
-    <a href="#help">Як допомогти</a>
-    <a href="#media">Фото / Відео / Звіти</a>
-    <a href="#contacts">Контакти</a>
-  </nav>
+
+  <!-- КНОПКА МЕНЮ -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <!-- ВИПАДАЮЧЕ МЕНЮ -->
+  <div class="side-menu" id="sideMenu">
+    <a href="#about" onclick="closeMenu()">Про фонд</a>
+    <a href="#help" onclick="closeMenu()">Як допомогти</a>
+    <a href="#media" onclick="closeMenu()">Фото / Відео / Звіти</a>
+    <a href="#reports" onclick="closeMenu()">Звіти</a>
+    <a href="#photos" onclick="closeMenu()">Фото</a>
+    <a href="#videos" onclick="closeMenu()">Відео</a>
+    <a href="#contacts" onclick="closeMenu()">Контакти</a>
+  </div>
 
   <div class="top-banner-wrap">
     <img src="logo.jpg" class="top-banner" alt="Банер фонду">
@@ -359,47 +323,6 @@ text-shadow:
         Дивитися сюжет про цей марафон
       </a>
     </p>
-
-    <p>
-      Повернувшись додому, вже взимку я організував другий марафон — від Києва до Івано-Франківська,
-      у ході якого було зібрано 950 тисяч гривень на автомобіль для моїх побратимів з 3-ї штурмової бригади.
-    </p>
-
-    <p>
-      Після цього почалися регулярні збори на РЕБи, автомобілі, дрони, медичне обладнання
-      та іншу необхідну допомогу для різних підрозділів.
-    </p>
-
-    <p>
-      Так разом із командою ми заснували благодійний фонд і продовжуємо допомагати військовим
-      та цивільним, які цього потребують.
-    </p>
-
-    <h2>Сюжети та новини про мене</h2>
-
-    <div class="report-item">
-      <a href="https://suspilne.media/rivne/536283-jde-z-kieva-do-lvova-ak-u-rivnomu-zustrili-colovika-akij-zbirae-na-protezi-vijskovim-i-ditam/" target="_blank">
-        Суспільне Рівне — марафон Київ–Львів
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://suspilne.media/lviv/541497-veteran-azovu-projsov-piski-z-kieva-do-lvova-sob-zibrati-grosi-na-protezi-poranenim/" target="_blank">
-        Суспільне Львів — ветеран пройшов пішки з Києва до Львова
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.ukrinform.ua/rubric-society/3744091-piski-z-kieva-do-lvova-za-21-den-azovec-zibrav-na-likuvanna-pobratimiv-720-tisac.html" target="_blank">
-        Укрінформ — зібрано кошти на лікування побратимів
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://youtu.be/cwlptGNJJxc?si=oVTe1U4DoenVbUex" target="_blank">
-        YouTube — сюжет про марафон
-      </a>
-    </div>
   </div>
 
   <section id="about">
@@ -412,62 +335,6 @@ text-shadow:
       Ми робимо це, тому що не можемо інакше. Коли ти бачиш біль людей —
       ти або проходиш повз, або допомагаєш.
     </p>
-
-    <h2>Сюжети, інтерв’ю та новини про мене</h2>
-
-    <div class="report-item">
-      <a href="https://suspilne.media/rivne/536283-jde-z-kieva-do-lvova-ak-u-rivnomu-zustrili-colovika-akij-zbirae-na-protezi-vijskovim-i-ditam/" target="_blank">
-        Суспільне Рівне — марафон Київ–Львів
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://suspilne.media/lviv/541497-veteran-azovu-projsov-piski-z-kieva-do-lvova-sob-zibrati-grosi-na-protezi-poranenim/" target="_blank">
-        Суспільне Львів — ветеран пройшов пішки з Києва до Львова
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.ukrinform.ua/rubric-society/3744091-piski-z-kieva-do-lvova-za-21-den-azovec-zibrav-na-likuvanna-pobratimiv-720-tisac.html" target="_blank">
-        Укрінформ — похід Київ–Львів за 21 день
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=xXApMolyoVo" target="_blank">
-        YouTube — «Азовець» пройшов 600 км пішки
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=EM-6LTlgTDQ" target="_blank">
-        YouTube — піший похід для збору коштів для ЗСУ
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=eiyvJNG0Gxk" target="_blank">
-        YouTube — марафон Київ–Лісабон, Прага
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=KD_nRsV3GrU" target="_blank">
-        YouTube — Петро Скрипка, піший марафон Київ–Лісабон
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=cwlptGNJJxc" target="_blank">
-        YouTube — сюжет про марафон і збір допомоги
-      </a>
-    </div>
-
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=c1ZIGIKSSzg" target="_blank">
-        YouTube — «Я не забуду»: Київ–Лісабон
-      </a>
-    </div>
   </section>
 
   <section id="help">
@@ -513,18 +380,36 @@ text-shadow:
   <footer>
     Благодійний фонд Петра Скрипки © 2026
   </footer>
-<a href="https://send.monobank.ua/jar/6qpTzTDwDe"
-   class="floating-donate-btn"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Зробити донат">
 
-   <div class="floating-donate-icon">
-  <div class="circle-text">
-  СЛАВА УКРАЇНІ
-</div>
-  </div>
-  <div class="floating-donate-text">Зробити донат</div>
-</a>
+  <a href="https://send.monobank.ua/jar/6qpTzTDwDe"
+     class="floating-donate-btn"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Зробити донат">
+    <div class="floating-donate-icon">
+      <div class="circle-text">СЛАВА УКРАЇНІ</div>
+    </div>
+    <div class="floating-donate-text">Зробити донат</div>
+  </a>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("show");
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("show");
+    }
+
+    document.addEventListener("click", function(event) {
+      const menu = document.getElementById("sideMenu");
+      const button = document.querySelector(".menu-toggle");
+
+      if (!menu.contains(event.target) && !button.contains(event.target)) {
+        menu.classList.remove("show");
+      }
+    });
+  </script>
+
 </body>
 </html>
