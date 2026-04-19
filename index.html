@@ -1,562 +1,866 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Благодійний фонд Петра Скрипки</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petro Skrypka Foundation</title>
+  <meta name="description" content="Благодійний фонд Петра Скрипки" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #222;
-      line-height: 1.7;
-    }
-
-    .top-banner {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      object-position: bottom;
-      display: block;
-    }
-
-    /* КНОПКА МЕНЮ */
-    .menu-toggle {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      width: 52px;
-      height: 52px;
-      border: none;
-      border-radius: 12px;
-      background: #16324a;
-      color: white;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 100001;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    /* ВИПАДАЮЧЕ МЕНЮ */
-    .side-menu {
-      position: fixed;
-      top: 75px;
-      left: 15px;
-      width: 240px;
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-      padding: 12px 0;
-      display: none;
-      z-index: 100000;
-    }
-
-    .side-menu.show {
-      display: block;
-    }
-
-    .side-menu a {
-      display: block;
-      padding: 14px 18px;
-      text-decoration: none;
-      color: #16324a;
-      font-weight: bold;
-      border-bottom: 1px solid #edf1f5;
-    }
-
-    .side-menu a:last-child {
-      border-bottom: none;
-    }
-
-    .side-menu a:hover {
-      background: #f3f6fa;
-    }
-
-    /* СУЦІЛЬНА БІЛА СТОРІНКА */
-    .intro,
-    section,
-    .socials {
-      width: 100%;
-      margin: 0;
-      padding: 32px 60px;
+    * {
       box-sizing: border-box;
-      background: #ffffff;
-      border-radius: 0;
-      box-shadow: none;
+      margin: 0;
+      padding: 0;
     }
 
-    .intro {
-      padding-top: 40px;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .intro img {
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      color: #1d2a35;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
       display: block;
-      margin: 20px auto;
-      width: 100%;
-      max-width: 500px;
-      border-radius: 10px;
     }
 
-    h2 {
-      color: #1d3557;
-      margin-top: 0;
+    a {
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(13, 32, 49, 0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 78px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.8);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    nav a {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      opacity: 0.95;
+      transition: 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.08);
+      padding: 6px;
+      border-radius: 999px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      transition: 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: #ffd700;
+      color: #0d2031;
+    }
+
+    .donate-top {
+      background: #d62828;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none;
+      background: #11283d;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu .container {
+      padding: 14px 0 18px;
+    }
+
+    .mobile-menu nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .mobile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(rgba(10, 25, 41, 0.62), rgba(10, 25, 41, 0.62)),
+        url('logo.jpg') center/cover no-repeat;
+      color: #fff;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      padding: 70px 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.08;
       margin-bottom: 18px;
     }
 
-    p {
-      margin: 0 0 18px 0;
+    .hero p {
+      font-size: clamp(16px, 2vw, 22px);
+      max-width: 700px;
+      margin-bottom: 28px;
+      color: rgba(255,255,255,0.94);
     }
 
-    ul {
-      padding-left: 22px;
-      margin-bottom: 20px;
-    }
-
-    .button {
-      display: inline-block;
-      background: #d62828;
-      color: white;
-      padding: 14px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .gallery {
+    .hero-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
+      gap: 14px;
     }
 
-    .gallery img {
-      width: 300px;
-      max-width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .report-item {
-      padding: 10px 0;
-      margin-bottom: 8px;
-      background: transparent;
-      border-radius: 0;
-    }
-
-    /* СОЦМЕРЕЖІ ІКОНКАМИ */
-    .socials {
-      text-align: center;
-    }
-
-    .socials a {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 54px;
-      height: 54px;
-      margin: 8px;
-      border-radius: 50%;
-      background: #1d3557;
-      color: #ffffff;
-      font-size: 22px;
-      text-decoration: none;
-      transition: transform 0.2s ease, background 0.2s ease;
+      min-height: 50px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
     }
 
-    .socials a:hover {
-      transform: scale(1.08);
+    .btn-primary {
       background: #d62828;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.24);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 72px 0;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      margin-bottom: 18px;
+      color: #15324b;
+    }
+
+    .section-text {
+      font-size: 17px;
+      color: #44525f;
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 12px 40px rgba(17, 40, 61, 0.08);
+    }
+
+    .about-image {
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(17, 40, 61, 0.12);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .stat-box {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(17, 40, 61, 0.08);
+    }
+
+    .stat-number {
+      font-size: 30px;
+      font-weight: 800;
+      color: #d62828;
+      margin-bottom: 6px;
+    }
+
+    .help-grid,
+    .media-grid,
+    .social-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .help-item,
+    .media-item,
+    .social-item {
+      background: #fff;
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 10px 28px rgba(17, 40, 61, 0.08);
+    }
+
+    .help-item i,
+    .media-item i,
+    .social-item i {
+      font-size: 28px;
+      color: #1d3557;
+      margin-bottom: 14px;
+    }
+
+    .help-item h3,
+    .media-item h3,
+    .social-item h3 {
+      margin-bottom: 10px;
+      color: #16324a;
+      font-size: 20px;
+    }
+
+    .report-links {
+      display: grid;
+      gap: 14px;
+    }
+
+    .report-link {
+      display: block;
+      background: #fff;
+      padding: 18px 20px;
+      border-radius: 16px;
+      color: #15324b;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(17, 40, 61, 0.07);
+      transition: 0.2s ease;
+    }
+
+    .report-link:hover {
+      transform: translateY(-2px);
+      color: #d62828;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(17, 40, 61, 0.08);
+    }
+
+    /* CONTACTS */
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .social-links a {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #16324a;
+      color: #fff;
+      font-size: 22px;
+      transition: 0.2s ease;
+    }
+
+    .social-links a:hover {
+      background: #d62828;
+      transform: translateY(-2px);
     }
 
     footer {
+      background: #11283d;
+      color: #fff;
       text-align: center;
-      padding: 25px 20px;
-      background: #1d3557;
-      color: white;
+      padding: 28px 16px;
       margin-top: 20px;
     }
 
-    /* ПЛАВАЮЧА КНОПКА ДОНАТУ */
-    .floating-donate-btn {
+    /* FLOATING DONATE BUTTON */
+    .floating-donate {
       position: fixed;
-      right: 20px;
-      bottom: 20px;
-      display: flex;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2000;
+      display: inline-flex;
       align-items: center;
-      text-decoration: none;
-      z-index: 99999;
-      animation: donatePulse 2.2s infinite;
-    }
-
-    .floating-donate-icon {
-      width: 72px;
-      height: 72px;
-      min-width: 72px;
-      border-radius: 50%;
-      background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
-      border: 3px solid #ffffff;
-      position: relative;
-      z-index: 2;
-      overflow: hidden;
-    }
-
-    .floating-donate-icon::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
-      pointer-events: none;
-    }
-
-    .floating-donate-text {
-      background: linear-gradient(180deg, #e53935 0%, #c81d25 100%);
+      gap: 10px;
+      background: #d62828;
       color: #fff;
-      padding: 18px 26px 18px 42px;
-      margin-left: -18px;
+      padding: 14px 18px;
       border-radius: 999px;
-      font-size: 18px;
       font-weight: 800;
-      line-height: 1;
-      white-space: nowrap;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.24);
-      letter-spacing: 0.2px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
     }
 
-    .floating-donate-btn:hover .floating-donate-text {
-      transform: translateX(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+    .floating-donate i {
+      font-size: 18px;
     }
 
-    .circle-text {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      font-size: 11px;
-      font-weight: 900;
-      color: #ffffff;
-      text-shadow:
-        0 0 6px rgba(255,255,255,0.8),
-        0 0 12px rgba(255,255,255,0.6),
-        0 0 18px rgba(255,215,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      animation: spinText 6s linear infinite;
-    }
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      nav.desktop-nav,
+      .header-actions.desktop-actions {
+        display: none;
+      }
 
-    @keyframes donatePulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.035); }
-      100% { transform: scale(1); }
-    }
+      .menu-toggle {
+        display: block;
+      }
 
-    @keyframes spinText {
-      0%   { transform: rotateY(0deg); }
-      40%  { transform: rotateY(360deg); }
-      100% { transform: rotateY(360deg); }
+      .grid-2,
+      .help-grid,
+      .media-grid,
+      .social-grid,
+      .gallery,
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     @media (max-width: 768px) {
-      .intro,
-      section,
-      .socials {
-        padding: 24px 20px;
+      .hero {
+        min-height: 68vh;
       }
 
-      .top-banner {
-        height: 220px;
+      section {
+        padding: 56px 0;
       }
 
-      .side-menu {
-        width: calc(100% - 30px);
+      .grid-2,
+      .help-grid,
+      .media-grid,
+      .social-grid,
+      .gallery,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .floating-donate {
+        right: 12px;
+        bottom: 12px;
+        padding: 12px 16px;
+        font-size: 14px;
       }
     }
 
-    @media (max-width: 520px) {
-      .floating-donate-btn {
-        right: 10px;
-        bottom: 10px;
+    @media (max-width: 480px) {
+      .header-inner {
+        min-height: 70px;
       }
 
-      .floating-donate-icon {
-        width: 58px;
-        height: 58px;
-        min-width: 58px;
+      .logo {
+        font-size: 16px;
       }
 
-      .floating-donate-text {
-        font-size: 14px;
-        padding: 14px 18px 14px 32px;
+      .logo-badge {
+        width: 38px;
+        height: 38px;
       }
 
-      .intro,
-      section,
-      .socials {
-        padding: 22px 16px;
+      .hero-content {
+        padding: 54px 0;
       }
+
+      .card,
+      .help-item,
+      .media-item,
+      .social-item {
+        padding: 20px;
+      }
+    }
+
+    [data-lang] {
+      display: none;
+    }
+
+    [data-lang].active {
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-  <div class="side-menu" id="sideMenu">
-    <a href="#about" onclick="closeMenu()">Про фонд</a>
-    <a href="#help" onclick="closeMenu()">Як допомогти</a>
-    <a href="#media" onclick="closeMenu()">Фото / Відео / Звіти</a>
-    <a href="#reports" onclick="closeMenu()">Звіти</a>
-    <a href="#photos" onclick="closeMenu()">Фото</a>
-    <a href="#videos" onclick="closeMenu()">Відео</a>
-    <a href="#contacts" onclick="closeMenu()">Контакти</a>
-  </div>
-
-  <div class="top-banner-wrap">
-    <img src="logo.jpg" class="top-banner" alt="Банер фонду">
-  </div>
-
-  <div class="intro">
-    <p>
-      Я — Петро Скрипка, ветеран, колишній військовий та засновник благодійного фонду Петра Скрипки.
-    </p>
-
-    <div style="text-align:center; margin:20px 0;">
-      <img src="images/photo1.jpg" alt="Фото Петра Скрипки" style="max-width:500px; width:100%;">
-    </div>
-
-    <p>
-      Після того як я був комісований зі служби за станом здоров’я, я не зупинився.
-      Я організував піший благодійний марафон і пройшов від Києва до Нюрнберга (Німеччина),
-      подолавши понад 2000 кілометрів через Україну, Польщу та Чехію.
-    </p>
-
-    <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap; margin:20px 0;">
-      <img src="images/foto6.jpg" alt="Фото марафону 1" style="width:100%; max-width:320px; border-radius:10px;">
-      <img src="images/foto3.jpg" alt="Фото марафону 2" style="width:100%; max-width:320px; border-radius:10px;">
-    </div>
-
-    <p>
-      Метою цього марафону був збір коштів на протезування поранених військових.
-      Разом із небайдужими людьми нам вдалося зібрати 1,6 мільйона гривень,
-      які були передані організації «Янголи Азову» для допомоги нашим захисникам.
-    </p>
-
-    <img src="images/foto4.jpg" alt="Фото фонду" style="display:block; margin:20px auto; max-width:500px; width:100%; border-radius:10px;">
-
-    <p style="text-align:center;">
-      <a href="https://youtu.be/cwlptGNJJxc?si=oVTe1U4DoenVbUex" target="_blank" style="color:#1d3557; font-weight:bold;">
-        Дивитися сюжет про цей марафон
+  <header>
+    <div class="container header-inner">
+      <a href="#home" class="logo">
+        <div class="logo-badge"></div>
+        <span>Petro Skrypka Foundation</span>
       </a>
-    </p>
 
-    <p>
-      Повернувшись додому, вже взимку я організував другий марафон — від Києва до Івано-Франківська,
-      у ході якого було зібрано 950 тисяч гривень на автомобіль для моїх побратимів з 3-ї штурмової бригади.
-    </p>
+      <nav class="desktop-nav">
+        <a href="#about" data-i18n="nav_about">Про фонд</a>
+        <a href="#help" data-i18n="nav_help">Як допомогти</a>
+        <a href="#media" data-i18n="nav_media">Медіа</a>
+        <a href="#reports" data-i18n="nav_reports">Звіти</a>
+        <a href="#contacts" data-i18n="nav_contacts">Контакти</a>
+      </nav>
 
-    <p>
-      Після цього почалися регулярні збори на РЕБи, автомобілі, дрони, медичне обладнання
-      та іншу необхідну допомогу для різних підрозділів.
-    </p>
+      <div class="header-actions desktop-actions">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-set-lang="uk">UA</button>
+          <button class="lang-btn" data-set-lang="en">EN</button>
+          <button class="lang-btn" data-set-lang="sv">SV</button>
+        </div>
+        <a class="donate-top" href="https://send.monobank.ua/jar/6qpTzTDwDe" target="_blank" data-i18n="donate_btn">Підтримати</a>
+      </div>
 
-    <p>
-      Так разом із командою ми заснували благодійний фонд і продовжуємо допомагати військовим
-      та цивільним, які цього потребують.
-    </p>
-
-    <h2>Сюжети та новини про мене</h2>
-
-    <div class="report-item">
-      <a href="https://suspilne.media/rivne/536283-jde-z-kieva-do-lvova-ak-u-rivnomu-zustrili-colovika-akij-zbirae-na-protezi-vijskovim-i-ditam/" target="_blank">
-        Суспільне Рівне — марафон Київ–Львів
-      </a>
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
 
-    <div class="report-item">
-      <a href="https://suspilne.media/lviv/541497-veteran-azovu-projsov-piski-z-kieva-do-lvova-sob-zibrati-grosi-na-protezi-poranenim/" target="_blank">
-        Суспільне Львів — ветеран пройшов пішки з Києва до Львова
-      </a>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="container">
+        <nav>
+          <a href="#about" data-i18n="nav_about">Про фонд</a>
+          <a href="#help" data-i18n="nav_help">Як допомогти</a>
+          <a href="#media" data-i18n="nav_media">Медіа</a>
+          <a href="#reports" data-i18n="nav_reports">Звіти</a>
+          <a href="#contacts" data-i18n="nav_contacts">Контакти</a>
+        </nav>
+
+        <div class="mobile-actions">
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-set-lang="uk">UA</button>
+            <button class="lang-btn" data-set-lang="en">EN</button>
+            <button class="lang-btn" data-set-lang="sv">SV</button>
+          </div>
+
+          <a class="donate-top" href="https://send.monobank.ua/jar/6qpTzTDwDe" target="_blank" data-i18n="donate_btn">Підтримати</a>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <div class="report-item">
-      <a href="https://www.ukrinform.ua/rubric-society/3744091-piski-z-kieva-do-lvova-za-21-den-azovec-zibrav-na-likuvanna-pobratimiv-720-tisac.html" target="_blank">
-        Укрінформ — зібрано кошти на лікування побратимів
-      </a>
-    </div>
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-i18n="hero_title">Благодійний фонд Петра Скрипки</h1>
+          <p data-i18n="hero_text">
+            Допомога військовим, цивільним і дітям, які постраждали від війни. Разом ми можемо більше.
+          </p>
 
-    <div class="report-item">
-      <a href="https://youtu.be/cwlptGNJJxc?si=oVTe1U4DoenVbUex" target="_blank">
-        YouTube — сюжет про марафон
-      </a>
-    </div>
-  </div>
+          <div class="hero-buttons">
+            <a href="https://send.monobank.ua/jar/6qpTzTDwDe" target="_blank" class="btn btn-primary" data-i18n="hero_btn_1">Зробити донат</a>
+            <a href="#about" class="btn btn-secondary" data-i18n="hero_btn_2">Дізнатися більше</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>Про фонд</h2>
-    <p>
-      З перших днів війни я став на захист України. Сьогодні разом зі своєю командою
-      ми продовжуємо допомагати тим, хто цього найбільше потребує.
-    </p>
-    <p>
-      Ми робимо це, тому що не можемо інакше. Коли ти бачиш біль людей —
-      ти або проходиш повз, або допомагаєш.
-    </p>
+    <section id="about">
+      <div class="container">
+        <div class="grid-2">
+          <div class="card">
+            <h2 class="section-title" data-i18n="about_title">Про фонд</h2>
+            <p class="section-text" data-i18n="about_text_1">
+              Я — Петро Скрипка, ветеран, волонтер і засновник благодійного фонду. Після служби я продовжив боротьбу вже в гуманітарному напрямку.
+            </p>
+            <p class="section-text" data-i18n="about_text_2">
+              Фонд допомагає військовим, цивільним, дітям і родинам, які постраждали від війни. Ми організовуємо збори, передаємо техніку, транспорт, дрони, медичну допомогу та інші необхідні речі.
+            </p>
+          </div>
 
-    <h2>Сюжети, інтерв’ю та новини про мене</h2>
+          <div class="about-image">
+            <img src="images/photo1.jpg" alt="Петро Скрипка">
+          </div>
+        </div>
 
-    <div class="report-item">
-      <a href="https://suspilne.media/rivne/536283-jde-z-kieva-do-lvova-ak-u-rivnomu-zustrili-colovika-akij-zbirae-na-protezi-vijskovim-i-ditam/" target="_blank">
-        Суспільне Рівне — марафон Київ–Львів
-      </a>
-    </div>
+        <div class="stats">
+          <div class="stat-box">
+            <div class="stat-number">2000+</div>
+            <div data-i18n="stat_1">км благодійних маршрутів</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">1.6 млн</div>
+            <div data-i18n="stat_2">грн на допомогу захисникам</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">24/7</div>
+            <div data-i18n="stat_3">підтримка та допомога</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="report-item">
-      <a href="https://suspilne.media/lviv/541497-veteran-azovu-projsov-piski-z-kieva-do-lvova-sob-zibrati-grosi-na-protezi-poranenim/" target="_blank">
-        Суспільне Львів — ветеран пройшов пішки з Києва до Львова
-      </a>
-    </div>
+    <section id="help">
+      <div class="container">
+        <h2 class="section-title" data-i18n="help_title">Як допомогти</h2>
+        <p class="section-text" data-i18n="help_text">
+          Ви можете підтримати нашу діяльність фінансово, інформаційно або речами, які потрібні для військових та цивільних.
+        </p>
 
-    <div class="report-item">
-      <a href="https://www.ukrinform.ua/rubric-society/3744091-piski-z-kieva-do-lvova-za-21-den-azovec-zibrav-na-likuvanna-pobratimiv-720-tisac.html" target="_blank">
-        Укрінформ — похід Київ–Львів за 21 день
-      </a>
-    </div>
+        <div class="help-grid">
+          <div class="help-item">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3 data-i18n="help_card_1_title">Фінансова допомога</h3>
+            <p data-i18n="help_card_1_text">Підтримайте актуальні збори фонду через перевірені платіжні посилання.</p>
+          </div>
 
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=xXApMolyoVo" target="_blank">
-        YouTube — «Азовець» пройшов 600 км пішки
-      </a>
-    </div>
+          <div class="help-item">
+            <i class="fas fa-box-open"></i>
+            <h3 data-i18n="help_card_2_title">Передача речей</h3>
+            <p data-i18n="help_card_2_text">Авто, дрони, техніка, медицина, одяг, продукти та інші необхідні речі.</p>
+          </div>
 
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=EM-6LTlgTDQ" target="_blank">
-        YouTube — піший похід для збору коштів для ЗСУ
-      </a>
-    </div>
+          <div class="help-item">
+            <i class="fas fa-bullhorn"></i>
+            <h3 data-i18n="help_card_3_title">Інформаційна підтримка</h3>
+            <p data-i18n="help_card_3_text">Поширюйте інформацію про фонд, збори, звіти та нашу діяльність.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=eiyvJNG0Gxk" target="_blank">
-        YouTube — марафон Київ–Лісабон, Прага
-      </a>
-    </div>
+    <section id="media">
+      <div class="container">
+        <h2 class="section-title" data-i18n="media_title">Фото / Відео / Історії</h2>
+        <p class="section-text" data-i18n="media_text">
+          Тут можна показати фото діяльності фонду, благодійних маршрутів, допомоги військовим і медіа-матеріали.
+        </p>
 
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=KD_nRsV3GrU" target="_blank">
-        YouTube — Петро Скрипка, піший марафон Київ–Лісабон
-      </a>
-    </div>
+        <div class="gallery">
+          <img src="images/photo1.jpg" alt="Фото 1">
+          <img src="images/foto3.jpg" alt="Фото 2">
+          <img src="images/foto4.jpg" alt="Фото 3">
+        </div>
+      </div>
+    </section>
 
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=cwlptGNJJxc" target="_blank">
-        YouTube — сюжет про марафон і збір допомоги
-      </a>
-    </div>
+    <section id="reports">
+      <div class="container">
+        <h2 class="section-title" data-i18n="reports_title">Звіти та публікації</h2>
+        <p class="section-text" data-i18n="reports_text">
+          Додавайте сюди новини, сюжети, інтерв’ю, офіційні звіти та посилання на медіа.
+        </p>
 
-    <div class="report-item">
-      <a href="https://www.youtube.com/watch?v=c1ZIGIKSSzg" target="_blank">
-        YouTube — «Я не забуду»: Київ–Лісабон
-      </a>
-    </div>
-  </section>
+        <div class="report-links">
+          <a class="report-link" href="https://suspilne.media/rivne/536283-jde-z-kieva-do-lvova-ak-u-rivnomu-zustrili-colovika-akij-zbirae-na-protezi-vijskovim-i-ditam/" target="_blank">
+            Суспільне Рівне
+          </a>
+          <a class="report-link" href="https://suspilne.media/lviv/541497-veteran-azovu-projsov-piski-z-kieva-do-lvova-sob-zibrati-grosi-na-protezi-poranenim/" target="_blank">
+            Суспільне Львів
+          </a>
+          <a class="report-link" href="https://www.ukrinform.ua/rubric-society/3744091-piski-z-kieva-do-lvova-za-21-den-azovec-zibrav-na-likuvanna-pobratimiv-720-tisac.html" target="_blank">
+            Укрінформ
+          </a>
+          <a class="report-link" href="https://youtu.be/c1ZIGIKSSzg?si=Ct5e-mtE_7nLr3AR" target="_blank">
+            YouTube
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <section id="help">
-    <h2>Як допомогти</h2>
-    <p>Ви можете підтримати нашу діяльність:</p>
-    <ul>
-      <li>фінансовою допомогою</li>
-      <li>передачею необхідних речей</li>
-      <li>інформаційною підтримкою</li>
-    </ul>
-    <a class="button" href="https://send.monobank.ua/jar/6qpTzTDwDe" target="_blank">Підтримати фонд</a>
-  </section>
+    <section id="contacts">
+      <div class="container">
+        <h2 class="section-title" data-i18n="contacts_title">Контакти та соцмережі</h2>
+        <p class="section-text" data-i18n="contacts_text">
+          Зв’яжіться з нами або слідкуйте за діяльністю фонду в соціальних мережах.
+        </p>
 
-  <section id="media">
-    <h2>Фото / Відео / Звіти</h2>
-  </section>
-
-  <section id="reports">
-    <h2>Звіти та діяльність</h2>
-    <div class="report-item">Тут можна додавати звіти.</div>
-  </section>
-
-  <section id="photos">
-    <h2>Фото</h2>
-    <div class="gallery">
-      <img src="images/photo1.jpg" alt="Фото 1">
-    </div>
-  </section>
-
-  <section id="videos">
-    <h2>Відео</h2>
-    <p><a href="https://youtu.be/c1ZIGIKSSzg?si=Ct5e-mtE_7nLr3AR" target="_blank">Подивитися відео</a></p>
-  </section>
-
-  <div class="socials" id="contacts">
-    <a href="https://www.facebook.com/share/18Ny33b7tr/" target="_blank" aria-label="Facebook">
-      <i class="fab fa-facebook-f"></i>
-    </a>
-
-    <a href="https://www.tiktok.com/@marafondobra_p_s?_r=1&_t=ZS-95av7W2dXtA" target="_blank" aria-label="TikTok">
-      <i class="fab fa-tiktok"></i>
-    </a>
-
-    <a href="https://www.instagram.com/petro__skrypka?igsh=dm8ycWI4MHQ0bDJ6" target="_blank" aria-label="Instagram">
-      <i class="fab fa-instagram"></i>
-    </a>
-
-    <a href="https://www.threads.com/@petro__skrypka" target="_blank" aria-label="Threads">
-      <i class="fab fa-threads"></i>
-    </a>
-
-    <a href="https://t.me/PetroSkrypka911" target="_blank" aria-label="Telegram">
-      <i class="fab fa-telegram"></i>
-    </a>
-  </div>
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/18Ny33b7tr/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.tiktok.com/@marafondobra_p_s?_r=1&_t=ZS-95av7W2dXtA" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.instagram.com/petro__skrypka?igsh=dm8ycWI4MHQ0bDJ6" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.threads.com/@petro__skrypka" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
+          <a href="https://t.me/PetroSkrypka911" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    Благодійний фонд Петра Скрипки © 2026
+    <span data-i18n="footer_text">Благодійний фонд Петра Скрипки © 2026</span>
   </footer>
 
-  <a href="https://send.monobank.ua/jar/6qpTzTDwDe"
-     class="floating-donate-btn"
-     target="_blank"
-     rel="noopener noreferrer"
-     aria-label="Зробити донат">
-    <div class="floating-donate-icon">
-      <div class="circle-text">СЛАВА УКРАЇНІ</div>
-    </div>
-    <div class="floating-donate-text">Зробити донат</div>
+  <a href="https://send.monobank.ua/jar/6qpTzTDwDe" class="floating-donate" target="_blank">
+    <i class="fas fa-heart"></i>
+    <span data-i18n="floating_donate">Зробити донат</span>
   </a>
 
   <script>
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("show");
-    }
-
-    function closeMenu() {
-      document.getElementById("sideMenu").classList.remove("show");
-    }
-
-    document.addEventListener("click", function(event) {
-      const menu = document.getElementById("sideMenu");
-      const button = document.querySelector(".menu-toggle");
-
-      if (!menu.contains(event.target) && !button.contains(event.target)) {
-        menu.classList.remove("show");
+    const translations = {
+      uk: {
+        nav_about: "Про фонд",
+        nav_help: "Як допомогти",
+        nav_media: "Медіа",
+        nav_reports: "Звіти",
+        nav_contacts: "Контакти",
+        donate_btn: "Підтримати",
+        hero_title: "Благодійний фонд Петра Скрипки",
+        hero_text: "Допомога військовим, цивільним і дітям, які постраждали від війни. Разом ми можемо більше.",
+        hero_btn_1: "Зробити донат",
+        hero_btn_2: "Дізнатися більше",
+        about_title: "Про фонд",
+        about_text_1: "Я — Петро Скрипка, ветеран, волонтер і засновник благодійного фонду. Після служби я продовжив боротьбу вже в гуманітарному напрямку.",
+        about_text_2: "Фонд допомагає військовим, цивільним, дітям і родинам, які постраждали від війни. Ми організовуємо збори, передаємо техніку, транспорт, дрони, медичну допомогу та інші необхідні речі.",
+        stat_1: "км благодійних маршрутів",
+        stat_2: "грн на допомогу захисникам",
+        stat_3: "підтримка та допомога",
+        help_title: "Як допомогти",
+        help_text: "Ви можете підтримати нашу діяльність фінансово, інформаційно або речами, які потрібні для військових та цивільних.",
+        help_card_1_title: "Фінансова допомога",
+        help_card_1_text: "Підтримайте актуальні збори фонду через перевірені платіжні посилання.",
+        help_card_2_title: "Передача речей",
+        help_card_2_text: "Авто, дрони, техніка, медицина, одяг, продукти та інші необхідні речі.",
+        help_card_3_title: "Інформаційна підтримка",
+        help_card_3_text: "Поширюйте інформацію про фонд, збори, звіти та нашу діяльність.",
+        media_title: "Фото / Відео / Історії",
+        media_text: "Тут можна показати фото діяльності фонду, благодійних маршрутів, допомоги військовим і медіа-матеріали.",
+        reports_title: "Звіти та публікації",
+        reports_text: "Додавайте сюди новини, сюжети, інтерв’ю, офіційні звіти та посилання на медіа.",
+        contacts_title: "Контакти та соцмережі",
+        contacts_text: "Зв’яжіться з нами або слідкуйте за діяльністю фонду в соціальних мережах.",
+        footer_text: "Благодійний фонд Петра Скрипки © 2026",
+        floating_donate: "Зробити донат"
+      },
+      en: {
+        nav_about: "About",
+        nav_help: "How to help",
+        nav_media: "Media",
+        nav_reports: "Reports",
+        nav_contacts: "Contacts",
+        donate_btn: "Donate",
+        hero_title: "Petro Skrypka Foundation",
+        hero_text: "Support for soldiers, civilians, and children affected by war. Together we can do more.",
+        hero_btn_1: "Donate now",
+        hero_btn_2: "Learn more",
+        about_title: "About the foundation",
+        about_text_1: "I am Petro Skrypka, a veteran, volunteer, and founder of this charitable foundation. After military service, I continued the fight through humanitarian work.",
+        about_text_2: "The foundation helps soldiers, civilians, children, and families affected by war. We organize fundraisers and deliver vehicles, drones, medical aid, and other essential support.",
+        stat_1: "km of charity routes",
+        stat_2: "UAH raised for defenders",
+        stat_3: "support and assistance",
+        help_title: "How to help",
+        help_text: "You can support our work financially, through sharing information, or by donating needed items.",
+        help_card_1_title: "Financial support",
+        help_card_1_text: "Support the foundation’s active fundraising campaigns through verified payment links.",
+        help_card_2_title: "Donate supplies",
+        help_card_2_text: "Vehicles, drones, equipment, medicine, clothing, food, and other essential supplies.",
+        help_card_3_title: "Information support",
+        help_card_3_text: "Share information about the foundation, our fundraising campaigns, reports, and activities.",
+        media_title: "Photos / Videos / Stories",
+        media_text: "This section can show photos of the foundation’s work, charity routes, military support, and media materials.",
+        reports_title: "Reports and publications",
+        reports_text: "Add news, interviews, official reports, and media links here.",
+        contacts_title: "Contacts and social media",
+        contacts_text: "Contact us or follow the foundation’s activities on social media.",
+        footer_text: "Petro Skrypka Foundation © 2026",
+        floating_donate: "Donate"
+      },
+      sv: {
+        nav_about: "Om fonden",
+        nav_help: "Hur man hjälper",
+        nav_media: "Media",
+        nav_reports: "Rapporter",
+        nav_contacts: "Kontakter",
+        donate_btn: "Stöd oss",
+        hero_title: "Petro Skrypkas välgörenhetsfond",
+        hero_text: "Hjälp till soldater, civila och barn som drabbats av kriget. Tillsammans kan vi göra mer.",
+        hero_btn_1: "Donera",
+        hero_btn_2: "Läs mer",
+        about_title: "Om fonden",
+        about_text_1: "Jag är Petro Skrypka, veteran, volontär och grundare av denna välgörenhetsfond. Efter min tjänst fortsatte jag kampen genom humanitärt arbete.",
+        about_text_2: "Fonden hjälper soldater, civila, barn och familjer som drabbats av kriget. Vi organiserar insamlingar och levererar fordon, drönare, medicinsk hjälp och annat viktigt stöd.",
+        stat_1: "km välgörenhetsresor",
+        stat_2: "UAH insamlade för försvarare",
+        stat_3: "stöd och hjälp",
+        help_title: "Hur man hjälper",
+        help_text: "Du kan stödja vårt arbete ekonomiskt, genom informationsspridning eller genom att ge nödvändiga saker.",
+        help_card_1_title: "Ekonomiskt stöd",
+        help_card_1_text: "Stöd fondens aktuella insamlingar via verifierade betalningslänkar.",
+        help_card_2_title: "Ge utrustning",
+        help_card_2_text: "Fordon, drönare, teknik, medicin, kläder, mat och andra viktiga saker.",
+        help_card_3_title: "Informationsstöd",
+        help_card_3_text: "Sprid information om fonden, insamlingar, rapporter och vår verksamhet.",
+        media_title: "Foto / Video / Berättelser",
+        media_text: "Här kan du visa bilder från fondens arbete, välgörenhetsresor, hjälp till militären och mediamaterial.",
+        reports_title: "Rapporter och publikationer",
+        reports_text: "Lägg till nyheter, intervjuer, officiella rapporter och medielänkar här.",
+        contacts_title: "Kontakt och sociala medier",
+        contacts_text: "Kontakta oss eller följ fondens arbete i sociala medier.",
+        footer_text: "Petro Skrypka Foundation © 2026",
+        floating_donate: "Donera"
       }
-    });
-  </script>
+    };
 
+    const langButtons = document.querySelectorAll("[data-set-lang]");
+    const i18nElements = document.querySelectorAll("[data-i18n]");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const menuToggle = document.getElementById("menuToggle");
+
+    function setLanguage(lang) {
+      const current = translations[lang];
+
+      i18nElements.forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (current[key]) {
+          el.textContent = current[key];
+        }
+      });
+
+      document.documentElement.lang = lang;
+      localStorage.setItem("siteLang", lang);
+
+      langButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-set-lang") === lang);
+      });
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        setLanguage(btn.getAttribute("data-set-lang"));
+      });
+    });
+
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+      });
+    });
+
+    const savedLang = localStorage.getItem("siteLang") || "uk";
+    setLanguage(savedLang);
+  </script>
 </body>
 </html>
