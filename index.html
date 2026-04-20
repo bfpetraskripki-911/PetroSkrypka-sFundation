@@ -49,13 +49,17 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .top-flag-bar {
+      position: relative;
       overflow: hidden;
       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
       background: linear-gradient(to bottom, #0057b7 0 50%, #ffd700 50% 100%);
     }
 
-    header::before {
+    .top-flag-bar::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -76,6 +80,17 @@
       z-index: 0;
     }
 
+    .top-flag-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 30%, rgba(255,255,255,0.10), transparent 28%),
+        radial-gradient(circle at 85% 70%, rgba(255,255,255,0.10), transparent 24%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     @keyframes flagWave {
       0% {
         background-position: 200% 0;
@@ -88,7 +103,7 @@
     .header-inner {
       position: relative;
       z-index: 1;
-      min-height: 78px;
+      min-height: 82px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -100,8 +115,8 @@
       align-items: center;
       gap: 12px;
       color: #ffffff;
-      font-weight: 700;
-      font-size: 20px;
+      font-weight: 800;
+      font-size: 22px;
       min-width: 0;
       text-shadow: 0 2px 8px rgba(0,0,0,0.28);
     }
@@ -111,14 +126,14 @@
     }
 
     .logo-badge {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.24);
-      border: 2px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.20);
+      border: 2px solid rgba(255,255,255,0.45);
       backdrop-filter: blur(4px);
       flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
     }
 
     .header-controls {
@@ -182,10 +197,9 @@
 
     .mobile-menu {
       display: none;
-      position: relative;
-      z-index: 1;
-      background: rgba(255,255,255,0.97);
+      background: rgba(255,255,255,0.98);
       border-top: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
     }
 
     .mobile-menu.open {
@@ -410,7 +424,7 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 18px;
     }
 
@@ -531,11 +545,14 @@
 
     @media (max-width: 1100px) {
       .help-grid,
-      .gallery,
       .stats,
       .video-grid,
       .about-combined-inner {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -549,11 +566,14 @@
       }
 
       .help-grid,
-      .gallery,
       .stats,
       .video-grid,
       .about-combined-inner {
         grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .hero-buttons {
@@ -573,7 +593,7 @@
       }
 
       .header-inner {
-        min-height: 72px;
+        min-height: 76px;
       }
 
       .logo {
@@ -630,28 +650,34 @@
       .floating-donate span {
         font-size: 14px;
       }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="container header-inner">
-      <a href="#home" class="logo">
-        <div class="logo-badge"></div>
-        <span>Petro Skrypka Foundation</span>
-      </a>
+    <div class="top-flag-bar">
+      <div class="container header-inner">
+        <a href="#home" class="logo">
+          <div class="logo-badge"></div>
+          <span>Petro Skrypka Foundation</span>
+        </a>
 
-      <div class="header-controls">
-        <div class="lang-switcher">
-          <button type="button" class="lang-btn active" data-set-lang="uk">UA</button>
-          <button type="button" class="lang-btn" data-set-lang="en">EN</button>
-          <button type="button" class="lang-btn" data-set-lang="sv">SV</button>
+        <div class="header-controls">
+          <div class="lang-switcher">
+            <button type="button" class="lang-btn active" data-set-lang="uk">UA</button>
+            <button type="button" class="lang-btn" data-set-lang="en">EN</button>
+            <button type="button" class="lang-btn" data-set-lang="sv">SV</button>
+          </div>
+
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
-
-        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Меню">
-          <i class="fas fa-bars"></i>
-        </button>
       </div>
     </div>
 
@@ -764,9 +790,16 @@
         <p class="section-text" data-i18n="media_text">Тут можна показати фото діяльності фонду, благодійних маршрутів, допомоги військовим і медіа-матеріали.</p>
 
         <div class="gallery">
-          <img src="images/photo1.jpg" alt="Фото 1">
-          <img src="images/foto3.jpg" alt="Фото 2">
-          <img src="images/foto4.jpg" alt="Фото 3">
+          <img src="images/foto1.jpg" alt="Фото 1">
+          <img src="images/foto2.jpg" alt="Фото 2">
+          <img src="images/foto3.jpg" alt="Фото 3">
+          <img src="images/foto4.jpg" alt="Фото 4">
+          <img src="images/foto5.jpg" alt="Фото 5">
+          <img src="images/foto6.jpg" alt="Фото 6">
+          <img src="images/foto7.jpg" alt="Фото 7">
+          <img src="images/foto8.jpg" alt="Фото 8">
+          <img src="images/foto9.jpg" alt="Фото 9">
+          <img src="images/foto10.jpg" alt="Фото 10">
         </div>
       </div>
     </section>
