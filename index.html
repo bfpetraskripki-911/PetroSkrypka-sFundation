@@ -428,12 +428,19 @@
       gap: 18px;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 18px;
-      box-shadow: 0 8px 24px rgba(17, 40, 61, 0.08);
+  .gallery img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(17, 40, 61, 0.08);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.02);
+} 
     }
 
     .video-grid {
@@ -655,6 +662,85 @@
         grid-template-columns: 1fr;
       }
     }
+   .lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(0, 0, 0, 0.92);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.lightbox-content {
+  max-width: 92%;
+  max-height: 88%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  color: #fff;
+  font-size: 46px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 5002;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 34px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5002;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+.lightbox-nav:hover,
+.lightbox-close:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .lightbox-nav {
+    width: 48px;
+    height: 48px;
+    font-size: 28px;
+  }
+
+  .lightbox-prev {
+    left: 10px;
+  }
+
+  .lightbox-next {
+    right: 10px;
+  }
+
+  .lightbox-close {
+    top: 10px;
+    right: 16px;
+    font-size: 38px;
+  }
+} 
   </style>
 </head>
 <body>
@@ -1002,6 +1088,20 @@
       const i18nElements = document.querySelectorAll("[data-i18n]");
       const mobileMenu = document.getElementById("mobileMenu");
       const menuToggle = document.getElementById("menuToggle");
+            const galleryImages = [
+        "images/foto1.jpg",
+        "images/foto2.jpg",
+        "images/foto3.jpg",
+        "images/foto4.jpg",
+        "images/foto5.jpg",
+        "images/foto6.jpg",
+        "images/foto7.jpg",
+        "images/foto8.jpg",
+        "images/foto9.jpg",
+        "images/foto10.jpg"
+      ];
+
+      let currentImageIndex = 0;
 
       function setLanguage(lang) {
         const current = translations[lang];
@@ -1039,9 +1139,58 @@
           mobileMenu.classList.remove("open");
         });
       });
+      window.openLightbox = function (index) {
+        currentImageIndex = index;
+        document.getElementById("lightbox-img").src = galleryImages[currentImageIndex];
+        document.getElementById("lightbox").style.display = "flex";
+      };
 
+      window.closeLightbox = function () {
+        document.getElementById("lightbox").style.display = "none";
+      };
+
+      window.changeImage = function (direction) {
+        currentImageIndex += direction;
+
+        if (currentImageIndex < 0) {
+          currentImageIndex = galleryImages.length - 1;
+        }
+
+        if (currentImageIndex >= galleryImages.length) {
+          currentImageIndex = 0;
+        }
+
+        document.getElementById("lightbox-img").src = galleryImages[currentImageIndex];
+      };
+
+      document.addEventListener("keydown", function (event) {
+        const lightbox = document.getElementById("lightbox");
+        if (lightbox.style.display === "flex") {
+          if (event.key === "Escape") {
+            closeLightbox();
+          }
+          if (event.key === "ArrowLeft") {
+            changeImage(-1);
+          }
+          if (event.key === "ArrowRight") {
+            changeImage(1);
+          }
+        }
+      });
+
+      document.getElementById("lightbox").addEventListener("click", function (event) {
+        if (event.target.id === "lightbox") {
+          closeLightbox();
+        }
+      });
       setLanguage(localStorage.getItem("siteLang") || "uk");
     });
   </script>
+  <div id="lightbox" class="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
+  <img id="lightbox-img" class="lightbox-content" src="" alt="Велике фото">
+  <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</button>
+</div>
 </body>
 </html>
