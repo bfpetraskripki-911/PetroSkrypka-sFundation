@@ -457,47 +457,6 @@
       gap: 14px;
       margin-top: 22px;
     }
-    .campaign-badge {
-  display: inline-block;
-  margin-bottom: 14px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: #ffd700;
-  color: #16324a;
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-.campaign-progress-link {
-  display: block;
-  color: inherit;
-  border-radius: 18px;
-  transition: 0.25s ease;
-}
-
-.campaign-progress-link:hover {
-  transform: translateY(-3px) scale(1.01);
-}
-
-.campaign-progress-link:hover .progress-bar {
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.25);
-}
-
-.campaign-updated {
-  margin-top: 10px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.85);
-}
-
-.campaign-note {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #ffd700;
-  text-align: center;
-  font-weight: 600;
-}
 
     .trust-grid {
       display: grid;
@@ -958,39 +917,43 @@
       </div>
     </section>
 
-   
-         <a href="https://send.monobank.ua/jar/4s5gAK1VtZ" target="_blank" class="campaign-progress-link" aria-label="Перейти до актуального збору">
-  <div class="campaign-progress">
-    <div class="progress-top">
-      <span data-i18n="campaign_progress_label">Зібрано: 29 033 грн</span>
-      <span data-i18n="campaign_progress_goal">Ціль: 300 000 грн</span>
-    </div>
+    <section id="campaign">
+      <div class="container">
+        <div class="campaign-box">
+          <h2 class="section-title" data-i18n="campaign_title">Актуальний збір</h2>
+          <p class="section-text" data-i18n="campaign_text">Зараз ми збираємо кошти на транспорт, генератори, дрони та інше критично важливе обладнання для військових підрозділів. Кожен донат допомагає закрити реальні потреби швидше.</p>
 
-    <div class="progress-bar">
-      <div class="progress-fill" style="width: 9.7%;"></div>
-    </div>
+          <div class="campaign-targets">
+            <div class="campaign-target">
+              <i class="fas fa-car-side"></i>
+              <h3 data-i18n="campaign_card_1_title">Транспорт</h3>
+              <p data-i18n="campaign_card_1_text">Автівки для евакуації, логістики та виконання бойових завдань.</p>
+            </div>
 
-    <div class="campaign-updated">Оновлено вручну</div>
-  </div>
-</a>
-<div class="campaign-badge">АКТУАЛЬНИЙ ЗБІР</div>
+            <div class="campaign-target">
+              <i class="fas fa-bolt"></i>
+              <h3 data-i18n="campaign_card_2_title">Енергія</h3>
+              <p data-i18n="campaign_card_2_text">Генератори, зарядні станції та обладнання для стабільної роботи на позиціях.</p>
+            </div>
 
-<a href="https://send.monobank.ua/jar/4s5gAK1VtZ" target="_blank" class="campaign-progress-link">
-  <div class="campaign-progress">
-    <div class="progress-top">
-      <span>Зібрано: <strong>29 033 грн</strong></span>
-      <span>Ціль: <strong>300 000 грн</strong></span>
-    </div>
+            <div class="campaign-target">
+              <i class="fas fa-helicopter-symbol"></i>
+              <h3 data-i18n="campaign_card_3_title">Дрони</h3>
+              <p data-i18n="campaign_card_3_text">FPV-дрони, антени, комплектуючі та інші технології для підрозділів.</p>
+            </div>
+          </div>
 
-    <div class="progress-bar">
-      <div class="progress-fill" style="width: 9.7%;"></div>
-    </div>
+          <div class="campaign-progress">
+            <div class="progress-top">
+              <span data-i18n="campaign_progress_label">Зібрано: 27 000 грн</span>
+              <span data-i18n="campaign_progress_goal">Ціль: 300 000 грн</span>
+            </div>
 
-    <div class="campaign-updated">Оновлено щойно</div>
-  </div>
-</a>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
 
-<div class="campaign-note">Основний активний збір фонду</div>
           <div class="campaign-buttons">
             <a href="https://send.monobank.ua/jar/6qpTzTDwDe" class="btn btn-primary" target="_blank" data-i18n="campaign_btn_1">Підтримати збір</a>
             <a href="#reports" class="btn btn-secondary" data-i18n="campaign_btn_2">Переглянути звіти</a>
