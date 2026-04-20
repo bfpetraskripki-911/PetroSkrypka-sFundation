@@ -108,15 +108,33 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 22px;
       min-width: 0;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.28);
     }
 
     .logo span {
       white-space: nowrap;
+      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 1px;
+      background: linear-gradient(
+        to bottom,
+        #5a5a5a 0%,
+        #2b2b2b 12%,
+        #000000 32%,
+        #3a3a3a 52%,
+        #050505 72%,
+        #000000 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.18),
+        0 2px 4px rgba(0,0,0,0.35),
+        0 6px 14px rgba(0,0,0,0.22);
     }
 
     .logo-badge {
@@ -457,7 +475,7 @@
     }
 
     .progress-fill {
-      width: 62%;
+      width: 9%;
       height: 100%;
       background: linear-gradient(90deg, #ffd700, #ffb703);
       border-radius: 999px;
@@ -750,8 +768,8 @@
         min-height: 76px;
       }
 
-      .logo {
-        font-size: 16px;
+      .logo span {
+        font-size: 28px;
       }
 
       .logo-badge {
@@ -813,9 +831,10 @@
       }
 
       .logo span {
-        max-width: 170px;
+        max-width: 190px;
         white-space: normal;
-        line-height: 1.15;
+        line-height: 1.05;
+        font-size: 24px;
       }
 
       .floating-donate span {
@@ -962,7 +981,7 @@
             </div>
 
             <div class="progress-bar">
-              <div class="progress-fill" style="width: 9%;"></div>
+              <div class="progress-fill"></div>
             </div>
           </div>
 
