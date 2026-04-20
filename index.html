@@ -20,19 +20,23 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      background: #f7f9fc;
       color: #1d2a35;
       line-height: 1.6;
     }
 
-    img {
+    img,
+    video {
       max-width: 100%;
       display: block;
     }
 
     a {
       text-decoration: none;
-      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
     }
 
     .container {
@@ -40,117 +44,177 @@
       margin: 0 auto;
     }
 
-    /* Анімований прапор України зверху */
-    .flag-wave {
-      position: relative;
+    /* ВЕРХНЯ ПОЛОСКА-ПРАПОР */
+    .top-flag-strip {
       width: 100%;
-      height: 18px;
+      height: 44px;
+      position: relative;
       overflow: hidden;
-      z-index: 20;
+      background: linear-gradient(to bottom, #0057b7 0 50%, #ffd700 50% 100%);
     }
 
-    .flag-wave::before {
+    .top-flag-strip::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, #005bbb 0 50%, #ffd500 50% 100%);
+        linear-gradient(
+          120deg,
+          rgba(255,255,255,0) 0%,
+          rgba(255,255,255,0.22) 20%,
+          rgba(255,255,255,0) 40%,
+          rgba(255,255,255,0.15) 60%,
+          rgba(255,255,255,0) 80%,
+          rgba(255,255,255,0.2) 100%
+        );
       background-size: 200% 100%;
-      animation: waveMove 6s linear infinite;
-      transform: scale(1.05);
-    }
-
-    .flag-wave::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 10% 50%, rgba(255,255,255,0.18), transparent 18%),
-        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.12), transparent 20%),
-        radial-gradient(circle at 50% 60%, rgba(255,255,255,0.10), transparent 22%),
-        radial-gradient(circle at 70% 45%, rgba(255,255,255,0.15), transparent 18%),
-        radial-gradient(circle at 90% 55%, rgba(255,255,255,0.10), transparent 20%);
-      animation: waveShine 4s ease-in-out infinite;
+      animation: flagWave 4.8s linear infinite;
       pointer-events: none;
     }
 
-    @keyframes waveMove {
+    @keyframes flagWave {
       0% {
-        transform: translateX(0) skewX(0deg) scale(1.05);
-        filter: brightness(1);
-      }
-      25% {
-        transform: translateX(-1%) skewX(1deg) scale(1.06, 1.02);
-      }
-      50% {
-        transform: translateX(-2%) skewX(-1deg) scale(1.05, 1);
-        filter: brightness(1.05);
-      }
-      75% {
-        transform: translateX(-1%) skewX(1deg) scale(1.06, 1.02);
+        background-position: 200% 0;
       }
       100% {
-        transform: translateX(0) skewX(0deg) scale(1.05);
-        filter: brightness(1);
+        background-position: -200% 0;
       }
-    }
-
-    @keyframes waveShine {
-      0%, 100% { opacity: 0.45; transform: translateX(0); }
-      50% { opacity: 0.75; transform: translateX(-1%); }
     }
 
     /* HEADER */
     header {
-      background: linear-gradient(135deg, #0d1b2a, #1b3a57);
-      color: white;
-      padding: 18px 0;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
       position: sticky;
       top: 0;
-      z-index: 15;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
     }
 
-    .header-wrap {
+    .header-inner {
+      min-height: 78px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
     }
 
     .logo {
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    nav {
       display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      color: #15324b;
+      font-weight: 700;
+      font-size: 20px;
+      min-width: 0;
     }
 
-    nav a {
-      color: white;
-      font-weight: 600;
-      transition: 0.3s;
+    .logo span {
+      white-space: nowrap;
     }
 
-    nav a:hover {
-      color: #ffd500;
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
+      border: 2px solid rgba(21, 50, 75, 0.12);
+      flex-shrink: 0;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #eef3f8;
+      padding: 6px;
+      border-radius: 999px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: #15324b;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      transition: 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: #ffd700;
+      color: #0d2031;
+    }
+
+    .menu-toggle {
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 12px;
+      background: #15324b;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+      background: #d62828;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu .container {
+      padding: 18px 0 22px;
+    }
+
+    .mobile-menu nav {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mobile-menu nav a {
+      color: #15324b;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .mobile-menu nav a:hover {
+      color: #d62828;
     }
 
     /* HERO */
     .hero {
-      position: relative;
       min-height: 78vh;
       display: flex;
       align-items: center;
       background:
-        linear-gradient(rgba(13, 27, 42, 0.55), rgba(13, 27, 42, 0.45)),
-        url('banner.jpg') center/cover no-repeat;
-      color: white;
+        linear-gradient(rgba(10, 25, 41, 0.62), rgba(10, 25, 41, 0.62)),
+        url('logo.jpg') center/cover no-repeat;
+      color: #fff;
     }
 
     .hero-content {
@@ -159,146 +223,198 @@
     }
 
     .hero h1 {
-      font-size: clamp(32px, 5vw, 58px);
-      line-height: 1.1;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.08;
       margin-bottom: 18px;
     }
 
     .hero p {
-      font-size: 19px;
+      font-size: clamp(16px, 2vw, 22px);
+      max-width: 700px;
       margin-bottom: 28px;
-      max-width: 680px;
+      color: rgba(255,255,255,0.94);
     }
 
     .hero-buttons {
       display: flex;
-      gap: 14px;
       flex-wrap: wrap;
+      gap: 14px;
     }
 
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
       padding: 14px 24px;
-      border-radius: 999px;
+      border-radius: 12px;
       font-weight: 700;
-      transition: 0.3s;
-    }
-
-    .btn-primary {
-      background: #d62828;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #b71f1f;
+      transition: 0.2s ease;
     }
 
     .btn-secondary {
       background: rgba(255,255,255,0.14);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.28);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.24);
     }
 
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.22);
+      transform: translateY(-2px);
     }
 
-    /* SECTION */
+    /* SECTIONS */
     section {
-      padding: 70px 0;
+      padding: 72px 0;
     }
 
     .section-title {
-      text-align: center;
-      font-size: 34px;
+      font-size: clamp(28px, 4vw, 42px);
       margin-bottom: 18px;
-      color: #14324a;
+      color: #15324b;
     }
 
-    .section-subtitle {
-      text-align: center;
-      max-width: 820px;
-      margin: 0 auto 40px;
-      color: #4a5b6b;
+    .section-text {
       font-size: 17px;
+      color: #44525f;
+      max-width: 900px;
+      margin-bottom: 24px;
     }
 
-    /* Про фонд + фото в одному блоці */
-    .about-card {
+    .grid-2 {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(11, 38, 69, 0.12);
-    }
-
-    .about-text {
-      padding: 42px;
-      background:
-        linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.95)),
-        url('fon.jpg') center/cover no-repeat;
-    }
-
-    .about-text h2 {
-      font-size: 34px;
-      margin-bottom: 20px;
-      color: #14324a;
-    }
-
-    .about-text p {
-      margin-bottom: 14px;
-      font-size: 17px;
-      color: #2d3b48;
-    }
-
-    .about-photo {
-      min-height: 100%;
-      background: #dfe9f3;
-    }
-
-    .about-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* NEWS / INFO */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 28px;
+      align-items: center;
     }
 
     .card {
-      background: white;
+      background: #fff;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 12px 40px rgba(17, 40, 61, 0.08);
+    }
+
+    .about-image {
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(17, 40, 61, 0.12);
+    }
+
+    /* ОДИН СПІЛЬНИЙ БЛОК ПРО ФОНД */
+    .about-combined {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(12, 28, 44, 0.55), rgba(12, 28, 44, 0.45)),
+        url('logo.jpg') center/cover no-repeat;
+      box-shadow: 0 12px 40px rgba(17, 40, 61, 0.12);
+    }
+
+    .about-combined-inner {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      background: rgba(255,255,255,0.80);
+      backdrop-filter: blur(3px);
+    }
+
+    .about-text-wrap .section-title,
+    .about-text-wrap .section-text {
+      color: #15324b;
+    }
+
+    .about-photo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .about-photo-wrap img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 22px;
+      box-shadow: 0 12px 36px rgba(17, 40, 61, 0.18);
+      object-fit: cover;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .stat-box {
+      background: #fff;
       border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 22px rgba(11, 38, 69, 0.08);
-      transition: 0.3s;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(17, 40, 61, 0.08);
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card i {
+    .stat-number {
       font-size: 30px;
-      color: #005bbb;
-      margin-bottom: 16px;
+      font-weight: 800;
+      color: #d62828;
+      margin-bottom: 6px;
     }
 
-    .card h3 {
-      margin-bottom: 12px;
-      color: #14324a;
+    .impact-details {
+      margin-top: 26px;
+    }
+
+    .impact-list {
+      background: #fff;
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 12px 30px rgba(17, 40, 61, 0.08);
+    }
+
+    .impact-list h3 {
       font-size: 22px;
+      margin-bottom: 16px;
+      color: #15324b;
     }
 
-    .card p {
-      color: #4a5b6b;
+    .impact-list ul {
+      padding-left: 20px;
     }
 
-    /* ФОТО */
+    .impact-list li {
+      margin-bottom: 12px;
+      color: #44525f;
+      font-size: 16px;
+    }
+
+    .help-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .help-item {
+      background: #fff;
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 10px 28px rgba(17, 40, 61, 0.08);
+    }
+
+    .help-item i {
+      font-size: 28px;
+      color: #1d3557;
+      margin-bottom: 14px;
+    }
+
+    .help-item h3 {
+      margin-bottom: 10px;
+      color: #16324a;
+      font-size: 20px;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -310,10 +426,9 @@
       height: 260px;
       object-fit: cover;
       border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(11, 38, 69, 0.08);
+      box-shadow: 0 8px 24px rgba(17, 40, 61, 0.08);
     }
 
-    /* ВІДЕО */
     .video-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -321,171 +436,205 @@
     }
 
     .video-card {
-      background: white;
+      background: #fff;
       border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 8px 22px rgba(11, 38, 69, 0.08);
-      padding: 14px;
+      padding: 12px;
+      box-shadow: 0 8px 24px rgba(17, 40, 61, 0.08);
     }
 
-    .video-card video {
+    .video-grid video {
       width: 100%;
       height: 240px;
       border-radius: 14px;
       background: #000;
-      display: block;
+      box-shadow: none;
+      object-fit: cover;
     }
 
-    .video-title {
-      padding: 12px 4px 2px;
-      font-weight: 700;
-      color: #14324a;
-      font-size: 16px;
-    }
-
-    /* REPORTS */
-    .reports {
+    .report-links {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 14px;
     }
 
-    .report-card {
-      background: white;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 22px rgba(11, 38, 69, 0.08);
-    }
-
-    .report-card h3 {
-      margin-bottom: 12px;
-      color: #14324a;
-    }
-
-    .report-card p {
-      margin-bottom: 16px;
-      color: #4a5b6b;
-    }
-
-    .report-card a {
-      color: #005bbb;
+    .report-link {
+      display: block;
+      background: #fff;
+      padding: 18px 20px;
+      border-radius: 16px;
+      color: #15324b;
       font-weight: 700;
+      box-shadow: 0 8px 24px rgba(17, 40, 61, 0.07);
+      transition: 0.2s ease;
     }
 
-    /* CONTACT */
-    .contact-box {
-      background: linear-gradient(135deg, #14324a, #1e4d6e);
-      color: white;
-      border-radius: 24px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(11, 38, 69, 0.15);
+    .report-link:hover {
+      transform: translateY(-2px);
+      color: #d62828;
     }
 
-    .contact-box h2 {
-      margin-bottom: 14px;
-      font-size: 32px;
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 10px;
     }
 
-    .contact-box p {
-      margin-bottom: 14px;
-      font-size: 17px;
+    .social-links a {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #16324a;
+      color: #fff;
+      font-size: 22px;
+      transition: 0.2s ease;
     }
 
-    /* FOOTER */
+    .social-links a:hover {
+      background: #d62828;
+      transform: translateY(-2px);
+    }
+
     footer {
-      background: #0d1b2a;
-      color: rgba(255,255,255,0.85);
-      padding: 28px 0;
+      background: #11283d;
+      color: #fff;
       text-align: center;
+      padding: 28px 16px;
       margin-top: 20px;
     }
 
-    /* Плаваюча кнопка донату */
     .floating-donate {
       position: fixed;
-      right: 20px;
-      bottom: 20px;
-      background: #d62828;
-      color: white;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2000;
+      height: 62px;
+      padding: 0 20px;
       border-radius: 999px;
-      padding: 14px 18px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 10px 24px rgba(214, 40, 40, 0.35);
-      z-index: 1000;
+      justify-content: center;
+      gap: 10px;
+      background: #d62828;
+      color: #fff;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+      transition: 0.2s ease;
       font-weight: 700;
-      transition: 0.3s;
-      animation: pulse 2s infinite;
+      white-space: nowrap;
     }
 
     .floating-donate:hover {
-      transform: translateY(-3px) scale(1.02);
-      background: #b71f1f;
+      transform: translateY(-2px) scale(1.03);
     }
 
     .floating-donate i {
-      font-size: 20px;
-      background: rgba(255,255,255,0.16);
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
+      font-size: 22px;
     }
 
     .floating-donate span {
-      white-space: nowrap;
       font-size: 15px;
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(214,40,40,0.45); }
-      70% { box-shadow: 0 0 0 18px rgba(214,40,40,0); }
-      100% { box-shadow: 0 0 0 0 rgba(214,40,40,0); }
-    }
-
-    /* ADAPTIVE */
-    @media (max-width: 992px) {
-      .about-card,
-      .cards,
+    @media (max-width: 1100px) {
+      .grid-2,
+      .help-grid,
       .gallery,
+      .stats,
       .video-grid,
-      .reports {
+      .about-combined-inner {
         grid-template-columns: 1fr 1fr;
       }
     }
 
     @media (max-width: 768px) {
-      .about-card,
-      .cards,
+      .hero {
+        min-height: 68vh;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .grid-2,
+      .help-grid,
       .gallery,
+      .stats,
       .video-grid,
-      .reports {
+      .about-combined-inner {
         grid-template-columns: 1fr;
       }
 
-      .about-text {
-        padding: 28px;
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .about-photo {
-        min-height: 340px;
-      }
-
-      .logo {
-        font-size: 22px;
-      }
-
-      .hero {
-        min-height: 70vh;
+      .btn {
+        width: 100%;
       }
 
       .floating-donate {
-        right: 14px;
-        bottom: 14px;
-        padding: 12px 16px;
+        height: 56px;
+        right: 12px;
+        bottom: 12px;
+        padding: 0 16px;
+      }
+
+      .header-inner {
+        min-height: 72px;
+      }
+
+      .logo {
+        font-size: 16px;
+      }
+
+      .logo-badge {
+        width: 38px;
+        height: 38px;
+      }
+
+      .hero-content {
+        padding: 54px 0;
+      }
+
+      .card,
+      .help-item,
+      .impact-list,
+      .about-combined-inner {
+        padding: 20px;
+      }
+
+      .lang-btn {
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
+      .menu-toggle {
+        width: 44px;
+        height: 44px;
+      }
+
+      .video-grid video {
+        height: auto;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .header-controls {
+        gap: 8px;
+      }
+
+      .lang-switcher {
+        gap: 4px;
+        padding: 4px;
+      }
+
+      .logo span {
+        max-width: 170px;
+        white-space: normal;
+        line-height: 1.15;
       }
 
       .floating-donate span {
@@ -496,194 +645,382 @@
 </head>
 <body>
 
-  <div class="flag-wave"></div>
+  <div class="top-flag-strip"></div>
 
   <header>
-    <div class="container header-wrap">
-      <div class="logo">Petro Skrypka Foundation</div>
-      <nav>
-        <a href="#about">Про фонд</a>
-        <a href="#help">Напрямки допомоги</a>
-        <a href="#gallery">Фото</a>
-        <a href="#videos">Відео</a>
-        <a href="#reports">Звіти</a>
-        <a href="#contacts">Контакти</a>
-      </nav>
+    <div class="container header-inner">
+      <a href="#home" class="logo">
+        <div class="logo-badge"></div>
+        <span>Petro Skrypka Foundation</span>
+      </a>
+
+      <div class="header-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-btn active" data-set-lang="uk">UA</button>
+          <button type="button" class="lang-btn" data-set-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-set-lang="sv">SV</button>
+        </div>
+
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Меню">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="container">
+        <nav>
+          <a href="#about" data-i18n="nav_about">Про фонд</a>
+          <a href="#help" data-i18n="nav_help">Як допомогти</a>
+          <a href="#media" data-i18n="nav_media">Медіа</a>
+          <a href="#videos" data-i18n="nav_videos">Відео</a>
+          <a href="#reports" data-i18n="nav_reports">Звіти</a>
+          <a href="#contacts" data-i18n="nav_contacts">Контакти</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Разом допомагаємо Україні та тим, хто цього найбільше потребує</h1>
-        <p>
-          Благодійний фонд Петра Скрипки допомагає військовим, цивільним, дітям
-          та родинам, які постраждали від війни. Разом ми можемо зробити більше.
-        </p>
-        <div class="hero-buttons">
-          <a href="https://send.monobank.ua/jar/YOUR_LINK" class="btn btn-primary" target="_blank">Зробити донат</a>
-          <a href="#about" class="btn btn-secondary">Дізнатися більше</a>
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-i18n="hero_title">Благодійний фонд Петра Скрипки</h1>
+          <p data-i18n="hero_text">Допомога військовим, цивільним і дітям, які постраждали від війни. Разом ми можемо більше.</p>
+
+          <div class="hero-buttons">
+            <a href="#about" class="btn btn-secondary" data-i18n="hero_btn_2">Дізнатися більше</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="about">
-    <div class="container">
-      <div class="about-card">
-        <div class="about-text">
-          <h2>Про фонд</h2>
-          <p>
-            Міжнародний благодійний фонд Петра Скрипки створений для підтримки
-            військових, цивільних та дітей, які постраждали від війни в Україні.
-          </p>
-          <p>
-            Ми організовуємо гуманітарну допомогу, збираємо кошти на необхідне
-            обладнання, транспорт, дрони, медицину, продукти та інші життєво важливі речі.
-          </p>
-          <p>
-            Наше завдання — не просто допомагати, а бути поруч із тими, хто
-            щодня бореться за життя, свободу та майбутнє України.
-          </p>
-        </div>
-        <div class="about-photo">
-          <img src="petro.jpg" alt="Петро Скрипка">
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="about">
+      <div class="container">
+        <div class="about-combined">
+          <div class="about-combined-inner">
+            <div class="about-text-wrap">
+              <h2 class="section-title" data-i18n="about_title">Про фонд</h2>
+              <p class="section-text" data-i18n="about_text_1">Я — Петро Скрипка, ветеран, волонтер і засновник благодійного фонду. Після служби я продовжив боротьбу вже в гуманітарному напрямку.</p>
+              <p class="section-text" data-i18n="about_text_2">Фонд допомагає військовим, цивільним, дітям і родинам, які постраждали від війни. Ми організовуємо збори, передаємо техніку, транспорт, дрони, медичну допомогу та інші необхідні речі.</p>
+            </div>
 
-  <section id="help">
-    <div class="container">
-      <h2 class="section-title">Напрямки допомоги</h2>
-      <p class="section-subtitle">
-        Фонд працює в кількох важливих напрямках, щоб допомога доходила туди, де вона потрібна найбільше.
-      </p>
-
-      <div class="cards">
-        <div class="card">
-          <i class="fa-solid fa-truck-fast"></i>
-          <h3>Гуманітарна допомога</h3>
-          <p>Передача продуктів, одягу, ліків, засобів гігієни та інших необхідних речей.</p>
+            <div class="about-photo-wrap">
+              <img src="images/photo1.jpg" alt="Петро Скрипка">
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <i class="fa-solid fa-shield-heart"></i>
-          <h3>Підтримка військових</h3>
-          <p>Закупівля дронів, генераторів, автомобілів, Starlink, зарядних станцій та спорядження.</p>
+        <div class="stats">
+          <div class="stat-box">
+            <div class="stat-number">4600+</div>
+            <div data-i18n="stat_1">км пройдено благодійними маршрутами</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-number">4,1 млн</div>
+            <div data-i18n="stat_2">грн допомоги передано цього року</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-number">5</div>
+            <div data-i18n="stat_3">ключових напрямів допомоги</div>
+          </div>
         </div>
 
-        <div class="card">
-          <i class="fa-solid fa-hands-holding-child"></i>
-          <h3>Допомога дітям і родинам</h3>
-          <p>Підтримка дітей та сімей, які постраждали від війни та потребують особливої уваги.</p>
+        <div class="impact-details">
+          <div class="impact-list">
+            <h3 data-i18n="impact_title">Основні результати допомоги</h3>
+            <ul>
+              <li data-i18n="impact_1">1,6 млн грн — зібрано на протезування військових.</li>
+              <li data-i18n="impact_2">950 тис. грн — придбано авто для побратимів із 3-ї окремої штурмової бригади.</li>
+              <li data-i18n="impact_3">200 тис. грн — закуплено окуляри для FPV-дронів, антени та РЕБ для 3-ї штурмової бригади.</li>
+              <li data-i18n="impact_4">700 тис. грн — закуплено FPV-дрони для різних бригад і підрозділів.</li>
+              <li data-i18n="impact_5">4,1 млн грн — передано допомоги лише за цей рік.</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="gallery">
-    <div class="container">
-      <h2 class="section-title">Фото</h2>
-      <p class="section-subtitle">
-        Деякі моменти з нашої діяльності та благодійних ініціатив.
-      </p>
+    <section id="help">
+      <div class="container">
+        <h2 class="section-title" data-i18n="help_title">Як допомогти</h2>
+        <p class="section-text" data-i18n="help_text">Ви можете підтримати нашу діяльність фінансово, інформаційно або речами, які потрібні для військових та цивільних.</p>
 
-      <div class="gallery">
-        <img src="photo1.jpg" alt="Фото 1">
-        <img src="photo2.jpg" alt="Фото 2">
-        <img src="photo3.jpg" alt="Фото 3">
-      </div>
-    </div>
-  </section>
+        <div class="help-grid">
+          <div class="help-item">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3 data-i18n="help_card_1_title">Фінансова допомога</h3>
+            <p data-i18n="help_card_1_text">Підтримайте актуальні збори фонду через перевірені платіжні посилання.</p>
+          </div>
 
-  <section id="videos">
-    <div class="container">
-      <h2 class="section-title">Відео</h2>
-      <p class="section-subtitle">
-        Тут можна переглянути відео з діяльності фонду. Якщо відео не запускається,
-        перевір точну назву файлу та формат mp4.
-      </p>
+          <div class="help-item">
+            <i class="fas fa-box-open"></i>
+            <h3 data-i18n="help_card_2_title">Передача речей</h3>
+            <p data-i18n="help_card_2_text">Авто, дрони, техніка, медицина, одяг, продукти та інші необхідні речі.</p>
+          </div>
 
-      <div class="video-grid">
-        <div class="video-card">
-          <video controls preload="metadata">
-            <source src="video1.mp4" type="video/mp4">
-            Ваш браузер не підтримує відтворення відео.
-          </video>
-          <div class="video-title">Відео 1</div>
-        </div>
-
-        <div class="video-card">
-          <video controls preload="metadata">
-            <source src="video2.mp4" type="video/mp4">
-            Ваш браузер не підтримує відтворення відео.
-          </video>
-          <div class="video-title">Відео 2</div>
-        </div>
-
-        <div class="video-card">
-          <video controls preload="metadata">
-            <source src="video3.mp4" type="video/mp4">
-            Ваш браузер не підтримує відтворення відео.
-          </video>
-          <div class="video-title">Відео 3</div>
+          <div class="help-item">
+            <i class="fas fa-bullhorn"></i>
+            <h3 data-i18n="help_card_3_title">Інформаційна підтримка</h3>
+            <p data-i18n="help_card_3_text">Поширюйте інформацію про фонд, збори, звіти та нашу діяльність.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="reports">
-    <div class="container">
-      <h2 class="section-title">Звіти</h2>
-      <p class="section-subtitle">
-        Відкритість і прозорість — одна з головних цінностей фонду.
-      </p>
+    <section id="media">
+      <div class="container">
+        <h2 class="section-title" data-i18n="media_title">Фото / Відео / Історії</h2>
+        <p class="section-text" data-i18n="media_text">Тут можна показати фото діяльності фонду, благодійних маршрутів, допомоги військовим і медіа-матеріали.</p>
 
-      <div class="reports">
-        <div class="report-card">
-          <h3>Звіт №1</h3>
-          <p>Інформація про передану допомогу, закупівлі та підтримані напрямки.</p>
-          <a href="#">Переглянути звіт</a>
-        </div>
-
-        <div class="report-card">
-          <h3>Звіт №2</h3>
-          <p>Фінансовий та гуманітарний звіт по роботі фонду за обраний період.</p>
-          <a href="#">Переглянути звіт</a>
-        </div>
-
-        <div class="report-card">
-          <h3>Звіт №3</h3>
-          <p>Детальна інформація про доставлену допомогу та реалізовані проєкти.</p>
-          <a href="#">Переглянути звіт</a>
+        <div class="gallery">
+          <img src="images/photo1.jpg" alt="Фото 1">
+          <img src="images/foto3.jpg" alt="Фото 2">
+          <img src="images/foto4.jpg" alt="Фото 3">
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contacts">
-    <div class="container">
-      <div class="contact-box">
-        <h2>Контакти</h2>
-        <p>Якщо ви хочете допомогти, стати партнером або волонтером — зв’яжіться з нами.</p>
-        <p><strong>Email:</strong> yourmail@example.com</p>
-        <p><strong>Instagram:</strong> @petro_skrypka_911</p>
-        <p><strong>TikTok:</strong> @marafondobra_p_s</p>
+    <section id="videos">
+      <div class="container">
+        <h2 class="section-title" data-i18n="videos_title">Відеозвіти</h2>
+        <p class="section-text" data-i18n="videos_text">Тут можна додати відео про допомогу, маршрути, передачу техніки та звіти фонду.</p>
+
+        <div class="video-grid">
+          <div class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="videos/video1.mp4" type="video/mp4">
+              Ваш браузер не підтримує відео.
+            </video>
+          </div>
+
+          <div class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="videos/video2.mp4" type="video/mp4">
+              Ваш браузер не підтримує відео.
+            </video>
+          </div>
+
+          <div class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="videos/video3.mp4" type="video/mp4">
+              Ваш браузер не підтримує відео.
+            </video>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="reports">
+      <div class="container">
+        <h2 class="section-title" data-i18n="reports_title">Звіти та публікації</h2>
+        <p class="section-text" data-i18n="reports_text">Додавайте сюди новини, сюжети, інтерв’ю, офіційні звіти та посилання на медіа.</p>
+
+        <div class="report-links">
+          <a class="report-link" href="https://suspilne.media/rivne/536283-jde-z-kieva-do-lvova-ak-u-rivnomu-zustrili-colovika-akij-zbirae-na-protezi-vijskovim-i-ditam/" target="_blank">Суспільне Рівне</a>
+          <a class="report-link" href="https://suspilne.media/lviv/541497-veteran-azovu-projsov-piski-z-kieva-do-lvova-sob-zibrati-grosi-na-protezi-poranenim/" target="_blank">Суспільне Львів</a>
+          <a class="report-link" href="https://www.ukrinform.ua/rubric-society/3744091-piski-z-kieva-do-lvova-za-21-den-azovec-zibrav-na-likuvanna-pobratimiv-720-tisac.html" target="_blank">Укрінформ</a>
+          <a class="report-link" href="https://youtu.be/c1ZIGIKSSzg?si=Ct5e-mtE_7nLr3AR" target="_blank">YouTube</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container">
+        <h2 class="section-title" data-i18n="contacts_title">Контакти та соцмережі</h2>
+        <p class="section-text" data-i18n="contacts_text">Зв’яжіться з нами або слідкуйте за діяльністю фонду в соціальних мережах.</p>
+
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/18Ny33b7tr/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.tiktok.com/@marafondobra_p_s?_r=1&_t=ZS-95av7W2dXtA" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.instagram.com/petro__skrypka?igsh=dm8ycWI4MHQ0bDJ6" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.threads.com/@petro__skrypka" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
+          <a href="https://t.me/PetroSkrypka911" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="container">
-      © 2026 Petro Skrypka Foundation. Усі права захищені.
-    </div>
+    <span data-i18n="footer_text">Благодійний фонд Петра Скрипки © 2026</span>
   </footer>
 
-  <a href="https://send.monobank.ua/jar/YOUR_LINK" class="floating-donate" target="_blank" aria-label="Зробити донат">
-    <i class="fa-solid fa-heart"></i>
+  <a href="https://send.monobank.ua/jar/6qpTzTDwDe" class="floating-donate" target="_blank" aria-label="Donate">
+    <i class="fas fa-heart"></i>
     <span>Зробити донат</span>
   </a>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const translations = {
+        uk: {
+          nav_about: "Про фонд",
+          nav_help: "Як допомогти",
+          nav_media: "Медіа",
+          nav_videos: "Відео",
+          nav_reports: "Звіти",
+          nav_contacts: "Контакти",
+          hero_title: "Благодійний фонд Петра Скрипки",
+          hero_text: "Допомога військовим, цивільним і дітям, які постраждали від війни. Разом ми можемо більше.",
+          hero_btn_2: "Дізнатися більше",
+          about_title: "Про фонд",
+          about_text_1: "Я — Петро Скрипка, ветеран, волонтер і засновник благодійного фонду. Після служби я продовжив боротьбу вже в гуманітарному напрямку.",
+          about_text_2: "Фонд допомагає військовим, цивільним, дітям і родинам, які постраждали від війни. Ми організовуємо збори, передаємо техніку, транспорт, дрони, медичну допомогу та інші необхідні речі.",
+          stat_1: "км пройдено благодійними маршрутами",
+          stat_2: "грн допомоги передано цього року",
+          stat_3: "ключових напрямів допомоги",
+          impact_title: "Основні результати допомоги",
+          impact_1: "1,6 млн грн — зібрано на протезування військових.",
+          impact_2: "950 тис. грн — придбано авто для побратимів із 3-ї окремої штурмової бригади.",
+          impact_3: "200 тис. грн — закуплено окуляри для FPV-дронів, антени та РЕБ для 3-ї штурмової бригади.",
+          impact_4: "700 тис. грн — закуплено FPV-дрони для різних бригад і підрозділів.",
+          impact_5: "4,1 млн грн — передано допомоги лише за цей рік.",
+          help_title: "Як допомогти",
+          help_text: "Ви можете підтримати нашу діяльність фінансово, інформаційно або речами, які потрібні для військових та цивільних.",
+          help_card_1_title: "Фінансова допомога",
+          help_card_1_text: "Підтримайте актуальні збори фонду через перевірені платіжні посилання.",
+          help_card_2_title: "Передача речей",
+          help_card_2_text: "Авто, дрони, техніка, медицина, одяг, продукти та інші необхідні речі.",
+          help_card_3_title: "Інформаційна підтримка",
+          help_card_3_text: "Поширюйте інформацію про фонд, збори, звіти та нашу діяльність.",
+          media_title: "Фото / Відео / Історії",
+          media_text: "Тут можна показати фото діяльності фонду, благодійних маршрутів, допомоги військовим і медіа-матеріали.",
+          videos_title: "Відеозвіти",
+          videos_text: "Тут можна додати відео про допомогу, маршрути, передачу техніки та звіти фонду.",
+          reports_title: "Звіти та публікації",
+          reports_text: "Додавайте сюди новини, сюжети, інтерв’ю, офіційні звіти та посилання на медіа.",
+          contacts_title: "Контакти та соцмережі",
+          contacts_text: "Зв’яжіться з нами або слідкуйте за діяльністю фонду в соціальних мережах.",
+          footer_text: "Благодійний фонд Петра Скрипки © 2026"
+        },
+        en: {
+          nav_about: "About",
+          nav_help: "How to help",
+          nav_media: "Media",
+          nav_videos: "Videos",
+          nav_reports: "Reports",
+          nav_contacts: "Contacts",
+          hero_title: "Petro Skrypka Foundation",
+          hero_text: "Support for soldiers, civilians, and children affected by war. Together we can do more.",
+          hero_btn_2: "Learn more",
+          about_title: "About the foundation",
+          about_text_1: "I am Petro Skrypka, a veteran, volunteer, and founder of this charitable foundation. After military service, I continued the fight through humanitarian work.",
+          about_text_2: "The foundation helps soldiers, civilians, children, and families affected by war. We organize fundraisers and deliver vehicles, drones, medical aid, and other essential support.",
+          stat_1: "km completed in charity routes",
+          stat_2: "UAH of aid delivered this year",
+          stat_3: "key areas of support",
+          impact_title: "Key aid results",
+          impact_1: "UAH 1.6 million — raised for prosthetics for wounded soldiers.",
+          impact_2: "UAH 950 thousand — vehicle purchased for brothers-in-arms from the 3rd Separate Assault Brigade.",
+          impact_3: "UAH 200 thousand — FPV drone goggles, antennas, and EW equipment purchased for the 3rd Separate Assault Brigade.",
+          impact_4: "UAH 700 thousand — FPV drones purchased for different brigades and units.",
+          impact_5: "UAH 4.1 million — aid delivered this year alone.",
+          help_title: "How to help",
+          help_text: "You can support our work financially, through sharing information, or by donating needed items.",
+          help_card_1_title: "Financial support",
+          help_card_1_text: "Support the foundation’s active fundraising campaigns through verified payment links.",
+          help_card_2_title: "Donate supplies",
+          help_card_2_text: "Vehicles, drones, equipment, medicine, clothing, food, and other essential supplies.",
+          help_card_3_title: "Information support",
+          help_card_3_text: "Share information about the foundation, our fundraising campaigns, reports, and activities.",
+          media_title: "Photos / Videos / Stories",
+          media_text: "This section can show photos of the foundation’s work, charity routes, military support, and media materials.",
+          videos_title: "Video reports",
+          videos_text: "This section can include videos about aid delivery, charity routes, equipment transfers, and foundation reports.",
+          reports_title: "Reports and publications",
+          reports_text: "Add news, interviews, official reports, and media links here.",
+          contacts_title: "Contacts and social media",
+          contacts_text: "Contact us or follow the foundation’s activities on social media.",
+          footer_text: "Petro Skrypka Foundation © 2026"
+        },
+        sv: {
+          nav_about: "Om fonden",
+          nav_help: "Hur man hjälper",
+          nav_media: "Media",
+          nav_videos: "Videor",
+          nav_reports: "Rapporter",
+          nav_contacts: "Kontakter",
+          hero_title: "Petro Skrypkas välgörenhetsfond",
+          hero_text: "Hjälp till soldater, civila och barn som drabbats av kriget. Tillsammans kan vi göra mer.",
+          hero_btn_2: "Läs mer",
+          about_title: "Om fonden",
+          about_text_1: "Jag är Petro Skrypka, veteran, volontär och grundare av denna välgörenhetsfond. Efter min tjänst fortsatte jag kampen genom humanitärt arbete.",
+          about_text_2: "Fonden hjälper soldater, civila, barn och familjer som drabbats av kriget. Vi organiserar insamlingar och levererar fordon, drönare, medicinsk hjälp och annat viktigt stöd.",
+          stat_1: "km genomförda välgörenhetsrutter",
+          stat_2: "UAH i hjälp överförd i år",
+          stat_3: "viktiga hjälpområden",
+          impact_title: "Viktigaste resultaten av hjälpen",
+          impact_1: "1,6 miljoner UAH — insamlat för proteser till skadade soldater.",
+          impact_2: "950 tusen UAH — ett fordon köptes till kamrater i 3:e separata stormbrigaden.",
+          impact_3: "200 tusen UAH — FPV-drönarglasögon, antenner och EW-utrustning köptes till 3:e separata stormbrigaden.",
+          impact_4: "700 tusen UAH — FPV-drönare köptes till olika brigader och enheter.",
+          impact_5: "4,1 miljoner UAH — hjälp överförd bara under detta år.",
+          help_title: "Hur man hjälper",
+          help_text: "Du kan stödja vårt arbete ekonomiskt, genom informationsspridning eller genom att ge nödvändiga saker.",
+          help_card_1_title: "Ekonomiskt stöd",
+          help_card_1_text: "Stöd fondens aktuella insamlingar via verifierade betalningslänkar.",
+          help_card_2_title: "Ge utrustning",
+          help_card_2_text: "Fordon, drönare, teknik, medicin, kläder, mat och andra viktiga saker.",
+          help_card_3_title: "Informationsstöd",
+          help_card_3_text: "Sprid information om fonden, insamlingar, rapporter och vår verksamhet.",
+          media_title: "Foto / Video / Berättelser",
+          media_text: "Här kan du visa bilder från fondens arbete, välgörenhetsresor, hjälp till militären och mediamaterial.",
+          videos_title: "Videorapporter",
+          videos_text: "Här kan du lägga till videor om hjälp, resor, överföring av utrustning och fondens rapporter.",
+          reports_title: "Rapporter och publikationer",
+          reports_text: "Lägg till nyheter, intervjuer, officiella rapporter och medielänkar här.",
+          contacts_title: "Kontakt och sociala medier",
+          contacts_text: "Kontakta oss eller följ fondens arbete i sociala medier.",
+          footer_text: "Petro Skrypka Foundation © 2026"
+        }
+      };
+
+      const langButtons = document.querySelectorAll("[data-set-lang]");
+      const i18nElements = document.querySelectorAll("[data-i18n]");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuToggle = document.getElementById("menuToggle");
+
+      function setLanguage(lang) {
+        const current = translations[lang];
+        if (!current) return;
+
+        i18nElements.forEach(function (el) {
+          const key = el.getAttribute("data-i18n");
+          if (Object.prototype.hasOwnProperty.call(current, key)) {
+            el.textContent = current[key];
+          }
+        });
+
+        document.documentElement.lang = lang;
+        localStorage.setItem("siteLang", lang);
+
+        langButtons.forEach(function (btn) {
+          btn.classList.toggle("active", btn.getAttribute("data-set-lang") === lang);
+        });
+      }
+
+      langButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setLanguage(this.getAttribute("data-set-lang"));
+        });
+      });
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", function () {
+          mobileMenu.classList.toggle("open");
+        });
+      }
+
+      document.querySelectorAll(".mobile-menu a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          mobileMenu.classList.remove("open");
+        });
+      });
+
+      setLanguage(localStorage.getItem("siteLang") || "uk");
+    });
+  </script>
 </body>
 </html>
